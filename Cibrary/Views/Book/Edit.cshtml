@@ -1,0 +1,79 @@
+@model Cibrary.Models.Book
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset class="form-horizontal">
+        <legend>Book</legend>
+
+        @Html.HiddenFor(model => model.ID)
+
+        <div class="control-group">
+            @Html.LabelFor(model => model.title, new { @class = "control-label" })
+			<div class="controls">
+				@Html.EditorFor(model => model.title)
+				@Html.ValidationMessageFor(model => model.title, null, new { @class = "help-inline" })
+			</div>
+		</div>
+
+        <div class="control-group">
+            @Html.LabelFor(model => model.author, new { @class = "control-label" })
+			<div class="controls">
+				@Html.EditorFor(model => model.author)
+				@Html.ValidationMessageFor(model => model.author, null, new { @class = "help-inline" })
+			</div>
+		</div>
+
+        <div class="control-group">
+            @Html.LabelFor(model => model.release_year, new { @class = "control-label" })
+			<div class="controls">
+				@Html.EditorFor(model => model.release_year)
+				@Html.ValidationMessageFor(model => model.release_year, null, new { @class = "help-inline" })
+			</div>
+		</div>
+
+        <div class="control-group">
+            @Html.LabelFor(model => model.description, new { @class = "control-label" })
+			<div class="controls">
+				@Html.EditorFor(model => model.description)
+				@Html.ValidationMessageFor(model => model.description, null, new { @class = "help-inline" })
+			</div>
+		</div>
+
+        <div class="control-group">
+            @Html.LabelFor(model => model.external_link, new { @class = "control-label" })
+			<div class="controls">
+				@Html.EditorFor(model => model.external_link)
+				@Html.ValidationMessageFor(model => model.external_link, null, new { @class = "help-inline" })
+			</div>
+		</div>
+
+        <div class="control-group">
+            @Html.LabelFor(model => model.version, new { @class = "control-label" })
+			<div class="controls">
+				@Html.EditorFor(model => model.version)
+				@Html.ValidationMessageFor(model => model.version, null, new { @class = "help-inline" })
+			</div>
+		</div>
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Save" class="btn" />
+        </div>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

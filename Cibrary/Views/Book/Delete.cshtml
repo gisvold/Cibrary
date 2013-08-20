@@ -1,0 +1,71 @@
+@model Cibrary.Models.Book
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>Book</legend>
+
+	<dl>
+		<dt>
+			@Html.DisplayNameFor(model => model.title)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.title)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.author)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.author)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.release_year)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.release_year)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.description)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.description)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.external_link)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.external_link)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.version)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.version)
+		</dd>
+
+	</dl>
+</fieldset>
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+
+    <div class="form-actions no-color">
+        <input type="submit" value="Delete" class="btn" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+}

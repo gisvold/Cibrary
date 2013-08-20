@@ -1,0 +1,65 @@
+@model Cibrary.Models.Book
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+	<legend>Book</legend>
+	<dl>
+		<dt>
+			@Html.DisplayNameFor(model => model.title)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.title)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.author)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.author)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.release_year)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.release_year)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.description)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.description)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.external_link)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.external_link)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.version)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.version)
+		</dd>
+
+	</dl>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
