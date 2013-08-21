@@ -12,7 +12,7 @@
     @Html.ValidationSummary(true)
 
     <fieldset class="form-horizontal">
-        <legend>Bok</legend>
+        <legend>@Html.DisplayFor(model => model.Title)</legend>
 
         <div class="control-group">
             @Html.LabelFor(model => model.Title, new { @class = "control-label" })
