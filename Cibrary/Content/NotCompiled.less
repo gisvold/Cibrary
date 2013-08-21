@@ -1,4 +1,6 @@
 ﻿@purple-color: #54038e;
+@darkpurple-color: #320255;
+@lightpurple-color: #7635A5;
 @green-color: #c0d72f;
 @gray-color: #6e6e6e;
 
@@ -51,4 +53,22 @@ font-weight: bold;
 
 .navbar-inverse .nav li a:hover {
     color: lightgray;
+}
+
+.navbar-inverse .nav-collapse .nav li a {
+    color: white;
+}
+
+.navbar-inverse .nav-collapse .nav li a:hover {
+    background-color: @darkpurple-color;
+}
+
+.navbar-inverse .btn-navbar {
+    background-image: none;
+    background-color: @darkpurple-color;
+}
+
+.navbar-inverse .btn-navbar:hover {
+    background-image: none;
+    background-color: @lightpurple-color;
 }
