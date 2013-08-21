@@ -60,5 +60,7 @@ namespace Cibrary.Models
         }
 
         public DbSet<Cibrary.Models.Book> Books { get; set; }
+
+        public DbSet<Cibrary.Models.Category> Category { get; set; }
     }
 }
