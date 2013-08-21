@@ -17,14 +17,14 @@ namespace Cibrary.Controllers
         // GET: /Book/
         public ActionResult Index()
         {
-            return View(db.Book.ToList());
+            return View(db.Books.ToList());
         }
 
         //
         // GET: /Book/Details/5
-        public ActionResult Details(String id)
+        public ActionResult Details(Int32 id)
         {
-            Book book = db.Book.Find(id);
+            Book book = db.Books.Find(id);
             if (book == null)
             {
                 return HttpNotFound();
@@ -47,7 +47,7 @@ namespace Cibrary.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Book.Add(book);
+                db.Books.Add(book);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -57,9 +57,9 @@ namespace Cibrary.Controllers
 
         //
         // GET: /Book/Edit/5
-        public ActionResult Edit(String id)
+        public ActionResult Edit(Int32 id)
         {
-            Book book = db.Book.Find(id);
+            Book book = db.Books.Find(id);
             if (book == null)
             {
                 return HttpNotFound();
@@ -84,9 +84,9 @@ namespace Cibrary.Controllers
 
         //
         // GET: /Book/Delete/5
-        public ActionResult Delete(String id)
+        public ActionResult Delete(Int32 id)
         {
-            Book book = db.Book.Find(id);
+            Book book = db.Books.Find(id);
             if (book == null)
             {
                 return HttpNotFound();
@@ -98,10 +98,10 @@ namespace Cibrary.Controllers
         // POST: /Book/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(String id)
+        public ActionResult DeleteConfirmed(Int32 id)
         {
-            Book book = db.Book.Find(id);
-            db.Book.Remove(book);
+            Book book = db.Books.Find(id);
+            db.Books.Remove(book);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

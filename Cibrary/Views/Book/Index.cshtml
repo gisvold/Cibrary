@@ -12,22 +12,22 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.title)
+            @Html.DisplayNameFor(model => model.Title)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.author)
+            @Html.DisplayNameFor(model => model.Author)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.release_year)
+            @Html.DisplayNameFor(model => model.ReleaseYear)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.description)
+            @Html.DisplayNameFor(model => model.Description)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.external_link)
+            @Html.DisplayNameFor(model => model.ExternalLink)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.version)
+            @Html.DisplayNameFor(model => model.Edition)
         </th>
         <th></th>
     </tr>
@@ -35,27 +35,27 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.title)
+            @Html.DisplayFor(modelItem => item.Title)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.author)
+            @Html.DisplayFor(modelItem => item.Author)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.release_year)
+            @Html.DisplayFor(modelItem => item.ReleaseYear)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.description)
+            @Html.DisplayFor(modelItem => item.Description)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.external_link)
+            @Html.DisplayFor(modelItem => item.ExternalLink)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.version)
+            @Html.DisplayFor(modelItem => item.Edition)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+            @Html.ActionLink("Edit", "Edit", new { id=item.BookId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.BookId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.BookId })
         </td>
     </tr>
 }

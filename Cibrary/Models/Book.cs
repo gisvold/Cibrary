@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -9,13 +10,34 @@ namespace Cibrary.Models
 {
     public class Book
     {
-        public string ID { get; set; }
-        public string title { get; set; }
-        public string author { get; set; }
-        //public Category category { get; set; }
-        public string release_year { get; set; }
-        public string description { get; set; }
-        public string external_link { get; set; }
-        public string version { get; set; }
+        
+        public int BookId { get; set; }
+
+        [Required]
+        [Display(Name = "Tittel")]
+        public string Title { get; set; }
+
+        [Required]
+        [Display(Name = "Forfatter")]
+        public string Author { get; set; }
+
+        [Required]
+        [Display(Name = "Utgivelsesår")]
+        [Range(minimum:1900, maximum: 2200, ErrorMessage = "Må ha gyldig årstall.")]
+        public int ReleaseYear { get; set; }
+
+        [Required]
+        [Display(Name = "Beskrivelse")]
+        [DataType(DataType.MultilineText)]
+        public string Description { get; set; }
+
+        [Display(Name = "Ekstern link")]
+        public string ExternalLink { get; set; }
+
+        [Display(Name = "Utgave")]
+        public string Edition { get; set; }
+        
+        public virtual ICollection<Category> Categories { get; set; }
+        public virtual ICollection<Loan> Loans{ get; set; }
     }
 }

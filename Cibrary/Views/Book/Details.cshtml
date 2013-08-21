@@ -10,56 +10,56 @@
 	<legend>Book</legend>
 	<dl>
 		<dt>
-			@Html.DisplayNameFor(model => model.title)
+			@Html.DisplayNameFor(model => model.Title)
 		</dt>
 
 		<dd>
-			@Html.DisplayFor(model => model.title)
+			@Html.DisplayFor(model => model.Title)
 		</dd>
 
 		<dt>
-			@Html.DisplayNameFor(model => model.author)
+			@Html.DisplayNameFor(model => model.Author)
 		</dt>
 
 		<dd>
-			@Html.DisplayFor(model => model.author)
+			@Html.DisplayFor(model => model.Author)
 		</dd>
 
 		<dt>
-			@Html.DisplayNameFor(model => model.release_year)
+			@Html.DisplayNameFor(model => model.ReleaseYear)
 		</dt>
 
 		<dd>
-			@Html.DisplayFor(model => model.release_year)
+			@Html.DisplayFor(model => model.ReleaseYear)
 		</dd>
 
 		<dt>
-			@Html.DisplayNameFor(model => model.description)
+			@Html.DisplayNameFor(model => model.Description)
 		</dt>
 
 		<dd>
-			@Html.DisplayFor(model => model.description)
+			@Html.DisplayFor(model => model.Description)
 		</dd>
 
 		<dt>
-			@Html.DisplayNameFor(model => model.external_link)
+			@Html.DisplayNameFor(model => model.ExternalLink)
 		</dt>
 
 		<dd>
-			@Html.DisplayFor(model => model.external_link)
+			@Html.DisplayFor(model => model.ExternalLink)
 		</dd>
 
 		<dt>
-			@Html.DisplayNameFor(model => model.version)
+			@Html.DisplayNameFor(model => model.Edition)
 		</dt>
 
 		<dd>
-			@Html.DisplayFor(model => model.version)
+			@Html.DisplayFor(model => model.Edition)
 		</dd>
 
 	</dl>
 </fieldset>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id=Model.ID }) |
+    @Html.ActionLink("Edit", "Edit", new { id=Model.BookId }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
