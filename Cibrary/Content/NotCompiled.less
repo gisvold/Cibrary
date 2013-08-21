@@ -1,11 +1,12 @@
-﻿@purple-color: #54083e;
+﻿@purple-color: #54038e;
+@darkpurple-color: #320255;
+@lightpurple-color: #7635A5;
 @green-color: #c0d72f;
 @gray-color: #6e6e6e;
 
 body {
     padding-top: 60px;
     padding-bottom: 40px;
-    background-color: @purple-color;
 }
 
 .navbar{
@@ -34,4 +35,40 @@ input[type="checkbox"].input-validation-error {
 
 .validation-summary-valid {
     display: none;
+}
+
+.navbar-inverse .navbar-inner {
+    background-image: none;
+    background-color: @purple-color;
+}
+
+.navbar-inverse .brand {
+color: white;
+font-weight: bold;
+}
+
+.navbar-inverse .nav li a {
+    color: white;
+}
+
+.navbar-inverse .nav li a:hover {
+    color: lightgray;
+}
+
+.navbar-inverse .nav-collapse .nav li a {
+    color: white;
+}
+
+.navbar-inverse .nav-collapse .nav li a:hover {
+    background-color: @darkpurple-color;
+}
+
+.navbar-inverse .btn-navbar {
+    background-image: none;
+    background-color: @darkpurple-color;
+}
+
+.navbar-inverse .btn-navbar:hover {
+    background-image: none;
+    background-color: @lightpurple-color;
 }

@@ -4,18 +4,10 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Detaljer</h2>
+<h2>@Html.DisplayFor(model => model.Title)</h2>
 
 <fieldset>
-	<legend>Bok</legend>
 	<dl>
-		<dt>
-			@Html.DisplayNameFor(model => model.Title)
-		</dt>
-
-		<dd>
-			@Html.DisplayFor(model => model.Title)
-		</dd>
 
 		<dt>
 			@Html.DisplayNameFor(model => model.Author)
@@ -60,6 +52,6 @@
 	</dl>
 </fieldset>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id=Model.BookId }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Rediger", "Edit", new { id=Model.BookId }) |
+    @Html.ActionLink("Tilbake til søk", "Index")
 </p>
