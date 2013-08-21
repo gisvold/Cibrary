@@ -9,100 +9,99 @@ using Cibrary.Models;
 
 namespace Cibrary.Controllers
 {
-    public class BookController : Controller
+    public class CategoryController : Controller
     {
         private DataContext db = new DataContext();
-        
+
         //
-        // GET: /Book/
+        // GET: /Category/
         public ActionResult Index()
         {
-            return View(db.Books.ToList());
+            return View(db.Category.ToList());
         }
 
         //
-        // GET: /Book/Details/5
+        // GET: /Category/Details/5
         public ActionResult Details(Int32 id)
         {
-            Book book = db.Books.Find(id);
-            if (book == null)
+            Category category = db.Category.Find(id);
+            if (category == null)
             {
                 return HttpNotFound();
             }
-            return View(book);
+            return View(category);
         }
 
         //
-        // GET: /Book/Create
+        // GET: /Category/Create
         public ActionResult Create()
         {
-            ViewBag.Categories = db.Category.ToList();
             return View();
         }
 
         //
-        // POST: /Book/Create
+        // POST: /Category/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Book book)
+        public ActionResult Create(Category category)
         {
             if (ModelState.IsValid)
             {
-                db.Books.Add(book);
+                db.Category.Add(category);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(book);
+            return View(category);
         }
 
         //
-        // GET: /Book/Edit/5
+        // GET: /Category/Edit/5
         public ActionResult Edit(Int32 id)
         {
-            Book book = db.Books.Find(id);
-            if (book == null)
+            Category category = db.Category.Find(id);
+            if (category == null)
             {
                 return HttpNotFound();
             }
-            return View(book);
+            return View(category);
         }
 
         //
-        // POST: /Book/Edit/5
+        // POST: /Category/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Book book)
+        public ActionResult Edit(Category category)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(book).State = EntityState.Modified;
+                db.Entry(category).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(book);
+            return View(category);
         }
 
         //
-        // GET: /Book/Delete/5
+        // GET: /Category/Delete/5
         public ActionResult Delete(Int32 id)
         {
-            Book book = db.Books.Find(id);
-            if (book == null)
+            Category category = db.Category.Find(id);
+            if (category == null)
             {
                 return HttpNotFound();
             }
-            return View(book);
+            return View(category);
         }
 
         //
-        // POST: /Book/Delete/5
+        // POST: /Category/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(Int32 id)
         {
-            Book book = db.Books.Find(id);
-            db.Books.Remove(book);
+            Category category = db.Category.Find(id);
+            db.Category.Remove(category);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
