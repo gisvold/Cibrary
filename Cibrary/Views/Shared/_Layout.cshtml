@@ -20,10 +20,10 @@
                 @Html.ActionLink("CIBRARY", "Index", "Home", null, new { @class = "brand" })
                 <div class="nav-collapse collapse">
                     <ul class="nav">
-                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                        <li>@Html.ActionLink("About", "About", "Home")</li>
-                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                        <li>@Html.ActionLink("Register New Book ", "Create", "Book")</li>
+                        <li>@Html.ActionLink("Hjem", "Index", "Home")</li>
+                        <li>@Html.ActionLink("Om", "About", "Home")</li>
+                        <li>@Html.ActionLink("Kontakt", "Contact", "Home")</li>
+                        <li>@Html.ActionLink("Ny Bok ", "Create", "Book")</li>
                     </ul>
                     @Html.Partial("_LoginPartial")
                 </div>
@@ -34,7 +34,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - Ciber Norge</p>
         </footer>
     </div>
 
