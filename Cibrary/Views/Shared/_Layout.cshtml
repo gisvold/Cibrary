@@ -34,7 +34,11 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - Ciber Norge</p>
+            <div id="Ciber_logo" style="text-align: center;" >
+                <img src="@Url.Content("~/img/CIBER_logo.png")" />
+                <p>&copy; @DateTime.Now.Year - Ciber Norge AS</p>
+            </div>
+                
         </footer>
     </div>
 

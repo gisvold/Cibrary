@@ -4,14 +4,14 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
+<h2>Rediger bok</h2>
 
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
     <fieldset class="form-horizontal">
-        <legend>Book</legend>
+        <legend>Bok</legend>
 
         @Html.HiddenFor(model => model.BookId)
 
@@ -64,7 +64,7 @@
 		</div>
 
         <div class="form-actions no-color">
-            <input type="submit" value="Save" class="btn" />
+            <input type="submit" value="Lagre" class="btn" />
         </div>
     </fieldset>
 }
