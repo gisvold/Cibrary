@@ -25,6 +25,8 @@ namespace Cibrary.Controllers
             Roles = roles;
         }
 
+        
+
         public IUserSecretStore Secrets { get; private set; }
         public IUserLoginStore Logins { get; private set; }
         public IUserStore Users { get; private set; }
