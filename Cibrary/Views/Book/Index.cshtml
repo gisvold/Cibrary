@@ -77,3 +77,23 @@
     <i class="icon-plus"></i>
     @Html.ActionLink("Legg til bok", "Create")
 </p>
+
+<div class="accordion" id="booklist">
+
+    @foreach (var book in Model) {
+        <div class="accordion-group">
+        <div class="accordion-heading">
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+                @Html.DisplayFor(modelItem => book.Title)
+            </a>
+        </div>
+        <div id="collapseOne" class="accordion-body collapse in">
+            <div class="accordion-inner">
+                Anim pariatur cliche...
+            </div>
+        </div>
+    </div>
+    }
+
+    
+</div>
