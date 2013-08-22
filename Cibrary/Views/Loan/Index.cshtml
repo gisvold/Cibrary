@@ -1,0 +1,48 @@
+@model IEnumerable<Cibrary.Models.Loan>
+
+@{
+    ViewBag.Title = "Lånte bøker";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Book.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserProfile.UserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TimeLoaned)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TimeDelievered)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Book.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserProfile.UserName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TimeLoaned)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TimeDelievered)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>

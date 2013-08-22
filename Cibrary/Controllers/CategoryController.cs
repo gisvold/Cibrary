@@ -17,14 +17,14 @@ namespace Cibrary.Controllers
         // GET: /Category/
         public ActionResult Index()
         {
-            return View(db.Category.ToList());
+            return View(db.Categorys.ToList());
         }
 
         //
         // GET: /Category/Details/5
         public ActionResult Details(Int32 id)
         {
-            Category category = db.Category.Find(id);
+            Category category = db.Categorys.Find(id);
             if (category == null)
             {
                 return HttpNotFound();
@@ -47,7 +47,7 @@ namespace Cibrary.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Category.Add(category);
+                db.Categorys.Add(category);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -59,7 +59,7 @@ namespace Cibrary.Controllers
         // GET: /Category/Edit/5
         public ActionResult Edit(Int32 id)
         {
-            Category category = db.Category.Find(id);
+            Category category = db.Categorys.Find(id);
             if (category == null)
             {
                 return HttpNotFound();
@@ -86,7 +86,7 @@ namespace Cibrary.Controllers
         // GET: /Category/Delete/5
         public ActionResult Delete(Int32 id)
         {
-            Category category = db.Category.Find(id);
+            Category category = db.Categorys.Find(id);
             if (category == null)
             {
                 return HttpNotFound();
@@ -100,8 +100,8 @@ namespace Cibrary.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(Int32 id)
         {
-            Category category = db.Category.Find(id);
-            db.Category.Remove(category);
+            Category category = db.Categorys.Find(id);
+            db.Categorys.Remove(category);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
