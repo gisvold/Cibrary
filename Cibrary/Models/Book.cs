@@ -36,9 +36,11 @@ namespace Cibrary.Models
 
         [Display(Name = "Utgave")]
         public string Edition { get; set; }
-
+        
         [Display(Name = "Kategorier")]
         public virtual ICollection<Category> Categories { get; set; }
         public virtual ICollection<Loan> Loans{ get; set; }
+
+        
     }
 }

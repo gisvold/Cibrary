@@ -14,14 +14,15 @@ namespace Cibrary.Controllers
     public class BookController : Controller
     {
         private DataContext db = new DataContext();
-        
+
+
         //
         // GET: /Book/
-        public ActionResult Index()
+    /*    public ActionResult Index()
         {
             return View(db.Books.ToList());
         }
-
+     */   
         //
         // GET: /Book/Details/5
         public ActionResult Details(Int32 id)
@@ -166,5 +167,26 @@ namespace Cibrary.Controllers
             db.Dispose();
             base.Dispose(disposing);
         }
+
+        //new code 21/08
+        public ActionResult Index(string searchString)
+        {
+            IQueryable<Book> books = from m in db.Books
+                       select m;
+
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                int AsciiString = (int)searchString[0];
+                int intString =0;
+                if (!(AsciiString < 48 || AsciiString > 57))
+                    intString = Convert.ToInt32(searchString);
+                books = books.Where(s => (s.Title.Contains(searchString) || (s.Author.Contains(searchString)) || (s.Description.Contains(searchString)) || (s.Edition.Contains(searchString)) || (s.Categories.Any(c => c.Name.Equals(searchString)))||(s.ReleaseYear==intString)));
+                
+            }
+
+            return View(books);
+        }
+
     }
 }
