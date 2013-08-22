@@ -60,9 +60,10 @@
             @Html.DisplayFor(modelItem => item.Edition)
         </td>
         <td>
-                @Html.ActionLink("Rediger", "Edit", new { id = item.BookId }) |
-                @Html.ActionLink("Detaljer", "Details", new { id = item.BookId }) |
-                @Html.ActionLink("Slett", "Delete", new { id = item.BookId })
+            @Html.ActionLink("Rediger", "Edit", new { id = item.BookId }) |
+            @Html.ActionLink("Detaljer", "Details", new { id = item.BookId }) |
+            @Html.ActionLink("Slett", "Delete", new { id = item.BookId }) |
+            @Html.ActionLink("Lån", "LoanBook", new { id = item.BookId })
         </td>
     </tr>
 }
