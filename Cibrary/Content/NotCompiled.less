@@ -110,6 +110,7 @@ font-weight: bold;
     
     :hover {
         background-color: @darkgreen-color;
+        color: black;
 }
 
     a {
@@ -159,3 +160,14 @@ font-weight: bold;
 
 }
 
+a {
+    color: @purple-color;
+
+    &:hover {
+        color: @lightpurple-color;
+    }
+    &:visited, &:link, &:active
+    {
+        text-decoration: none;
+    }
+}
