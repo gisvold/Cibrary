@@ -1,3 +1,4 @@
+@using Cibrary.Models
 @model IEnumerable<Cibrary.Models.Book>
 
 @{
@@ -41,18 +42,17 @@
         <div class="accordion-inner">
 
                     <p>@Html.DisplayFor(modelItem => item.Description)</p>
-                    
-                        <table>
-                            <tr>
-                                <td>Kategorier: </td>
+                    <div>
+                                Kategorier:
                                 @foreach (var kat in item.Categories)
                                 {
-                                   <td>@Html.ActionLink(kat.Name, "Index", new { searchString = kat.Name })</td>
+                                    <span class="tag">
+                                        @Html.ActionLink(kat.Name, "Index", new { searchString = kat.Name })
+                                   </span>
                                 }
-                            </tr>
-                        </table><br>
-                    
-                    
+                    </div>
+            <br>
+            
             @Html.ActionLink("Rediger", "Edit", new { id = item.BookId }) | @Html.ActionLink("Slett", "Delete", new { id = item.BookId })
         </div>
     </div>
@@ -61,7 +61,15 @@
 
    
 </div>
-
+<span class="pull-right">
+    @{
+        int available = Model.Count();
+    }
+    @Html.DisplayFor(a => available) tilgjengelige bøker (
+    @{
+        int total = Model.Count();
+    }
+    @Html.DisplayFor(t => total) totalt )</span>
 <p>
     <i class="icon-plus"></i>
     @Html.ActionLink("Legg til bok", "Create")
