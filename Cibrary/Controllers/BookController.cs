@@ -169,7 +169,10 @@ namespace Cibrary.Controllers
             Book book = db.Books.Find(id);
             String userId = User.Identity.GetUserId();
             User user = db.Users.Find(userId);
-
+            if (db.Loans.Find(book.BookId, userId) != null)
+            {
+                return RedirectToAction("Index");
+            }
             Loan newLoan = new Loan
             {
                 UserProfile = user, 
