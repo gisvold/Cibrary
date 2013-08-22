@@ -12,7 +12,7 @@ namespace Cibrary.Controllers
     public class BookController : Controller
     {
         private DataContext db = new DataContext();
-       
+
 
         //
         // GET: /Book/
@@ -37,6 +37,7 @@ namespace Cibrary.Controllers
         // GET: /Book/Create
         public ActionResult Create()
         {
+            ViewBag.Categories = db.Category.ToList();
             return View();
         }
 

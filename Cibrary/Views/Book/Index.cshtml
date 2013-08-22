@@ -4,7 +4,6 @@
     ViewBag.Title = "Search Page";
 }
 
-<h2>Index</h2>
 
     @Html.ActionLink("Create New", "Create")
     @using (Html.BeginForm())
@@ -18,6 +17,7 @@
 
 <table class="table">
     <tr>
+        
         <th>
             @Html.DisplayNameFor(model => model.Title)
         </th>
@@ -41,31 +41,35 @@
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Author)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ReleaseYear)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ExternalLink)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Edition)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.BookId }) |
-                @Html.ActionLink("Details", "Details", new { id = item.BookId }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.BookId })
-            </td>
-        </tr>
-    }
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Author)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReleaseYear)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ExternalLink)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Edition)
+        </td>
+        <td>
+                @Html.ActionLink("Rediger", "Edit", new { id = item.BookId }) |
+                @Html.ActionLink("Detaljer", "Details", new { id = item.BookId }) |
+                @Html.ActionLink("Slett", "Delete", new { id = item.BookId })
+        </td>
+    </tr>
+}
 
 </table>
+<p>
+    <i class="icon-plus"></i>
+    @Html.ActionLink("Legg til bok", "Create")
+</p>

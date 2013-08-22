@@ -1,3 +1,4 @@
+@using Cibrary.Models
 @model Cibrary.Models.Book
 
 @{
@@ -6,61 +7,92 @@
 
 <h2>Legg til ny bok</h2>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
     <fieldset class="form-horizontal">
-        <legend>Bok</legend>
+        <legend>@Html.DisplayFor(model => model.Title)</legend>
 
         <div class="control-group">
-            @Html.LabelFor(model => model.Title, new { @class = "control-label" })
-			<div class="controls">
-				@Html.EditorFor(model => model.Title)
-				@Html.ValidationMessageFor(model => model.Title, null, new { @class = "help-inline" })
-			</div>
-		</div>
+            @Html.LabelFor(model => model.Title, new {@class = "control-label"})
+            <div class="controls">
+                @Html.EditorFor(model => model.Title)
+                @Html.ValidationMessageFor(model => model.Title, null, new {@class = "help-inline"})
+            </div>
+        </div>
 
         <div class="control-group">
-            @Html.LabelFor(model => model.Author, new { @class = "control-label" })
-			<div class="controls">
-				@Html.EditorFor(model => model.Author)
-				@Html.ValidationMessageFor(model => model.Author, null, new { @class = "help-inline" })
-			</div>
-		</div>
+            @Html.LabelFor(model => model.Author, new {@class = "control-label"})
+            <div class="controls">
+                @Html.EditorFor(model => model.Author)
+                @Html.ValidationMessageFor(model => model.Author, null, new {@class = "help-inline"})
+            </div>
+        </div>
 
         <div class="control-group">
-            @Html.LabelFor(model => model.ReleaseYear, new { @class = "control-label" })
-			<div class="controls">
-				@Html.EditorFor(model => model.ReleaseYear)
-				@Html.ValidationMessageFor(model => model.ReleaseYear, null, new { @class = "help-inline" })
-			</div>
-		</div>
+            @Html.LabelFor(model => model.ReleaseYear, new {@class = "control-label"})
+            <div class="controls">
+                @Html.EditorFor(model => model.ReleaseYear)
+                @Html.ValidationMessageFor(model => model.ReleaseYear, null, new {@class = "help-inline"})
+            </div>
+        </div>
 
         <div class="control-group">
-            @Html.LabelFor(model => model.Description, new { @class = "control-label" })
-			<div class="controls">
-				@Html.EditorFor(model => model.Description)
-				@Html.ValidationMessageFor(model => model.Description, null, new { @class = "help-inline" })
-			</div>
-		</div>
+            @Html.LabelFor(model => model.Description, new {@class = "control-label"})
+            <div class="controls">
+                @Html.EditorFor(model => model.Description)
+                @Html.ValidationMessageFor(model => model.Description, null, new {@class = "help-inline"})
+            </div>
+        </div>
 
         <div class="control-group">
-            @Html.LabelFor(model => model.ExternalLink, new { @class = "control-label" })
-			<div class="controls">
-				@Html.EditorFor(model => model.ExternalLink)
-				@Html.ValidationMessageFor(model => model.ExternalLink, null, new { @class = "help-inline" })
-			</div>
-		</div>
+            @Html.LabelFor(model => model.ExternalLink, new {@class = "control-label"})
+            <div class="controls">
+                @Html.EditorFor(model => model.ExternalLink)
+                @Html.ValidationMessageFor(model => model.ExternalLink, null, new {@class = "help-inline"})
+            </div>
+        </div>
 
         <div class="control-group">
-            @Html.LabelFor(model => model.Edition, new { @class = "control-label" })
-			<div class="controls">
-				@Html.EditorFor(model => model.Edition)
-				@Html.ValidationMessageFor(model => model.Edition, null, new { @class = "help-inline" })
-			</div>
-		</div>
+            @Html.LabelFor(model => model.Edition, new {@class = "control-label"})
+            <div class="controls">
+                @Html.EditorFor(model => model.Edition)
+                @Html.ValidationMessageFor(model => model.Edition, null, new {@class = "help-inline"})
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label" for="Categories">Kategorier</label>
+            <div class="controls">
+                <table>
+                    <tr>
+                    @{
+                        int cnt = 0;
+                        List<Category> categories = ViewBag.Categories;
+
+                        foreach (var category in categories)
+                        {
+                            if (cnt++ % 3 == 0)
+                            {
+                                @:</tr><tr>
+                            }
+                        
+                            @:<td>
+                                <input type="checkbox"
+                                       name="selectedCategory"
+                                       value="@category.CategoryId" />
+                                 @:  @category.Name
+                            @:</td>
+                        }
+                        @:</tr>
+                    }
+                </table>
+                </div>
+                        </div>
+
+
 
         <div class="form-actions no-color">
             <input type="submit" value="Legg til" class="btn" />
@@ -75,4 +107,3 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
-

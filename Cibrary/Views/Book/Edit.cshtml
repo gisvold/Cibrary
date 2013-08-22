@@ -11,7 +11,7 @@
     @Html.ValidationSummary(true)
 
     <fieldset class="form-horizontal">
-        <legend>Bok</legend>
+        <legend>@Html.DisplayFor(model => model.Title)</legend>
 
         @Html.HiddenFor(model => model.BookId)
 
@@ -70,7 +70,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Tilbake til søk", "Index")
 </div>
 
 @section Scripts {
