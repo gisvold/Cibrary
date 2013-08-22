@@ -78,13 +78,13 @@
                             if (cnt++%3 == 0)
                             {@:</tr ><tr >
                             }@:
-                            <td class="checkbox">
-                                <input id=@category.CategoryId type="checkbox" name="selectedCategories" value="@category.CategoryId" />
-                                <label for=@category.CategoryId>
+                            <td class="categoryCheckbox">
+    <input id=@category.CategoryId type="checkbox" name="selectedCategories" value="@category.CategoryId" />
+    <label for=@category.CategoryId>
 
-                                    @category.Name
-                                </label>
-                            </td>
+        @category.Name
+    </label>
+</td>
                         }@:</tr >
                     }</table>
                 <span>
