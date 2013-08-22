@@ -5,6 +5,7 @@
 @darkgreen-color: #869621;
 @lightgreen-color: #CDDF59;
 @gray-color: #6e6e6e;
+@lightgray-color: #eeeeee;
 
 body {
     padding-top: 60px;
@@ -121,3 +122,30 @@ font-weight: bold;
 .accordion-heading:hover {
     background-color: @darkgreen-color;
 }
+
+
+.checkbox{
+
+    padding: 2px;
+
+    label{
+        display:inline-block;
+        background: @lightgray-color;
+        padding:5px;
+
+        &:hover{
+            background: @green-color;
+        }
+    }
+
+    input[type="checkbox"]{
+        display: none;
+    }
+
+    input[type="checkbox"]:checked + label{
+        background-color: @lightgreen-color;
+
+    }
+
+}
+

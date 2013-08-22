@@ -79,9 +79,10 @@
                                 @:</tr><tr>
                             }
                         
-                            @:<td>
-                            <label class="checkbox">
-                            <input type="checkbox" name="selectedCategories" value="@category.CategoryId" />
+                            @:<td class="checkbox">
+                            <input id=@category.CategoryId type="checkbox" name="selectedCategories" value="@category.CategoryId" />
+                            <label for=@category.CategoryId>
+                            
                             @category.Name
                         </label>
                             @:</td>
