@@ -3,7 +3,7 @@
 @lightpurple-color: #7635A5;
 @green-color: #c0d72f;
 @darkgreen-color: #869621;
-@lightgreen-color: #CDDF59;
+@lightgreen-color: #E6EFAC;
 @gray-color: #6e6e6e;
 @lightgray-color: #eeeeee;
 
@@ -108,19 +108,29 @@ font-weight: bold;
 .accordion-heading {
     background-color: @green-color;
     
+    :hover {
+        background-color: @darkgreen-color;
 }
 
-.accordion-heading a {
+    a {
     font-weight: bold;
     color: black;
 }
 
-.accordion-heading p {
+    p {
     font-style: italic;
 }
+}
 
-.accordion-heading:hover {
-    background-color: @darkgreen-color;
+.tag a {
+        color: black;
+        background-color: @lightgreen-color;
+        padding: 5px;
+        margin-right: 5px;
+}
+
+.tag a:hover {
+    background-color: @green-color;
 }
 
 
