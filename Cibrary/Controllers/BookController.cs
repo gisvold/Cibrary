@@ -13,16 +13,8 @@ namespace Cibrary.Controllers
     {
         private DataContext db = new DataContext();
 
-
-        //
-        // GET: /Book/
-    /*    public ActionResult Index()
-        {
-            return View(db.Books.ToList());
-        }
-     */   
-        //
         // GET: /Book/Details/5
+        [Authorize]
         public ActionResult Details(Int32 id)
         {
             Book book = db.Books.Find(id);
@@ -59,6 +51,7 @@ namespace Cibrary.Controllers
 
         //
         // GET: /Book/Edit/5
+        [Authorize]
         public ActionResult Edit(Int32 id)
         {
             Book book = db.Books.Find(id);
@@ -86,6 +79,7 @@ namespace Cibrary.Controllers
 
         //
         // GET: /Book/Delete/5
+        [Authorize]
         public ActionResult Delete(Int32 id)
         {
             Book book = db.Books.Find(id);
@@ -114,26 +108,24 @@ namespace Cibrary.Controllers
             base.Dispose(disposing);
         }
 
-        //new code 21/08
+        //Seach Function
         public ActionResult Index(string searchString)
         {
             IQueryable<Book> book = from m in db.Books
                        select m;
 
-
             if (!String.IsNullOrEmpty(searchString))
             {
-                string copyString = string.Copy(searchString);
-                int AsciiString = (int) copyString[0];
-                int intString =0;
-                if (!(AsciiString < 48 || AsciiString > 57))
-                    intString = Convert.ToInt32(copyString);
-                
 
-                book = book.Where(s => (s.Title.Contains(searchString) || (s.Author.Contains(searchString)) || (s.Description.Contains(searchString)) || (s.Edition.Contains(searchString)) || (s.Categories.Any(c => c.Name.Equals(searchString)))||(s.ReleaseYear==intString)));
+            int intString;
+            int.TryParse(searchString, out intString);
+
+            book = book.Where(s => (s.Title.Contains(searchString) || (s.Author.Contains(searchString)) || (s.Description.Contains(searchString)) || (s.Edition.Contains(searchString)) || (s.Categories.Any(c => c.Name.Equals(searchString)))||(s.ReleaseYear==intString)));
                 
             }
 
+            //book = book.Where(s => (s.Loans.Any(c => (c.BookId.Equals(s.BookId)))));
+            
             return View(book);
         }
 
