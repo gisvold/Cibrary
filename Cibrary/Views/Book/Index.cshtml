@@ -1,3 +1,4 @@
+@using Cibrary.Models
 @model IEnumerable<Cibrary.Models.Book>
 
 @{
@@ -51,7 +52,15 @@
 
    
 </div>
-
+<span class="pull-right">
+    @{
+        int available = Model.Count();
+    }
+    @Html.DisplayFor(a => available) tilgjengelige bøker (
+    @{
+        int total = Model.Count();
+    }
+    @Html.DisplayFor(t => total) totalt )</span>
 <p>
     <i class="icon-plus"></i>
     @Html.ActionLink("Legg til bok", "Create")
