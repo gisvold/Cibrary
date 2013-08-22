@@ -32,18 +32,17 @@
         <div class="accordion-inner">
 
                     <p>@Html.DisplayFor(modelItem => item.Description)</p>
-                    
-                        <table>
-                            <tr>
-                                <td>Kategorier: </td>
+                    <div>
+                                Kategorier:
                                 @foreach (var kat in item.Categories)
                                 {
-                                   <td>@Html.ActionLink(kat.Name, "Index", new { searchString = kat.Name })</td>
+                                    <span class="tag">
+                                        @Html.ActionLink(kat.Name, "Index", new { searchString = kat.Name })
+                                   </span>
                                 }
-                            </tr>
-                        </table><br>
-                    
-                    
+                    </div>
+            <br>
+            
             @Html.ActionLink("Rediger", "Edit", new { id = item.BookId }) | @Html.ActionLink("Slett", "Delete", new { id = item.BookId })
         </div>
     </div>
