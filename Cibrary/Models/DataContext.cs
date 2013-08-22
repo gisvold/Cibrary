@@ -28,7 +28,7 @@ namespace Cibrary.Models
                 if (user != null && Users.Where(u => u.UserName.ToUpper() == user.UserName.ToUpper()).Count() > 0)
                 {
                     var result = new DbEntityValidationResult(entityEntry, new List<DbValidationError>());
-                    result.ValidationErrors.Add(new DbValidationError("User", "User name must be unique."));
+                    result.ValidationErrors.Add(new DbValidationError("User", "Brukernavnet må være unikt."));
                     return result;
                 }
             }

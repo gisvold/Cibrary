@@ -3,22 +3,20 @@
 @{
     ViewBag.Title = "Search Page";
 }
-  
 
-<br />
-   <!-- Html.ActionLink("Create New", "Create")-->
+
     @using (Html.BeginForm())
     {
-    <p>
-        @Html.TextBox("SearchString" ) 
-        <input type="submit"  value="search" />
+    <p id="SearchBoxContainer">
+        @Html.TextBox("SearchString") 
+        <input type="submit" class="submitsearch" value=""/>
     </p>
-        <br  />
     }
     
 
-<table class="table">
-    <tr>        
+<table class="table table-hover">
+    <tr>
+        
         <th>
             @Html.DisplayNameFor(model => model.Title)
         </th>
@@ -66,23 +64,10 @@
         <td>
             @Html.DisplayFor(modelItem => item.Edition)
         </td>
-
         <td>
-                @Html.ActionLink("Rediger", "Edit", new { id = item.BookId }) 
-                @Html.ActionLink("Detaljer", "Details", new { id = item.BookId }) 
+                @Html.ActionLink("Rediger", "Edit", new { id = item.BookId }) |
+                @Html.ActionLink("Detaljer", "Details", new { id = item.BookId }) |
                 @Html.ActionLink("Slett", "Delete", new { id = item.BookId })
-        </td>
-        <td>
-             @{
-                 
-              //String deliverStatus = from item.Loans where (s => (s.Any(c => (c.BookId.Equals(item.BookId))))) select s.TimeDelievered;
-              //status = "lån";
-              //if(deliverStatus.Equals(null))
-              // {status = "lånt";}
-                 
-              }  
-           
-                 
         </td>
     </tr>
 }

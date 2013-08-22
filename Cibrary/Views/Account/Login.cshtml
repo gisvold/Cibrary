@@ -1,30 +1,30 @@
 @model Cibrary.Models.LoginViewModel
 
 @{
-    ViewBag.Title = "Log in";
+    ViewBag.Title = "Logg inn";
 }
 
 <hgroup class="title">
     <h1>@ViewBag.Title.</h1>
 </hgroup>
 <div class="row-fluid">
-    <div class="span6">
+    <div class="span12">
         <section id="loginForm">
             @using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl }))
             {
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary(true)
                 <fieldset class="form-horizontal">
-                    <legend>Use a local account to log in.</legend>
+                    <legend>Logg inn med din CIBRARY-konto.</legend>
                     <div class="control-group">
-                        @Html.LabelFor(m => m.UserName, new { @class = "control-label" })
+                        @Html.LabelFor(m => m.UserName, "Brukernavn", new { @class = "control-label" })
                         <div class="controls">
                             @Html.TextBoxFor(m => m.UserName)
                             @Html.ValidationMessageFor(m => m.UserName, null, new { @class = "help-inline" })
                         </div>
                     </div>
                     <div class="control-group">
-                        @Html.LabelFor(m => m.Password, new { @class = "control-label" })
+                        @Html.LabelFor(m => m.Password, "Passord", new { @class = "control-label" })
                         <div class="controls">
                             @Html.PasswordFor(m => m.Password)
                             @Html.ValidationMessageFor(m => m.Password, null, new { @class = "help-inline" })
@@ -34,21 +34,21 @@
                         <div class="controls">
                             <label class="checkbox">
                                 @Html.CheckBoxFor(m => m.RememberMe)
-                                @Html.LabelFor(m => m.RememberMe)
+                                @Html.LabelFor(m => m.RememberMe, "Husk meg?")
                             </label>
                         </div>
                     </div>
                     <div class="form-actions no-color">
-                        <input type="submit" value="Log in" class="btn" />
+                        <input type="submit" value="Logg inn" class="btn" />
                     </div>
                 </fieldset>
                 <p>
-                    @Html.ActionLink("Register", "Register") if you don't have a local account.
+                    Dersom du ikke har en CIBRARY-konto kan du registrere en ny @Html.ActionLink("her", "Register")
                 </p>
             }
         </section>
     </div>
-    <div class="span6">
+    <div class="span12">
         <section id="socialLoginForm">
 
             @Html.Action("ExternalLoginsList", new { ReturnUrl = ViewBag.ReturnUrl })

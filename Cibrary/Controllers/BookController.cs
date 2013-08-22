@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
+using System.Security.Permissions;
 using System.Web;
 using System.Web.Mvc;
 using Cibrary.Models;
@@ -37,8 +39,22 @@ namespace Cibrary.Controllers
         // POST: /Book/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Book book)
+        public ActionResult Create(Book book, int[] selectedCategories)
         {
+            if (book.Categories == null)
+            {
+                book.Categories = new Collection<Category>();
+            }
+
+            foreach (var selectedCategory in selectedCategories)
+            {
+                var category = db.Category.Find(selectedCategory);
+
+                book.Categories.Add(category);
+            }
+
+
+
             if (ModelState.IsValid)
             {
                 db.Books.Add(book);
@@ -55,6 +71,7 @@ namespace Cibrary.Controllers
         public ActionResult Edit(Int32 id)
         {
             Book book = db.Books.Find(id);
+            ViewBag.Categories = db.Category.ToList();
             if (book == null)
             {
                 return HttpNotFound();
@@ -66,17 +83,54 @@ namespace Cibrary.Controllers
         // POST: /Book/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Book book)
+        public ActionResult Edit(Book book, int[] selectedCategories)
         {
+            var dbBook = db.Books.Find(book.BookId);
+            var oldCategories = dbBook.Categories;
+            book.Categories = new Collection<Category>();
+            if (oldCategories != null)
+        {
+                book.Categories = oldCategories;
+            }
+            
+
+            UpdateBookCategories(selectedCategories,book);
             if (ModelState.IsValid)
             {
-                db.Entry(book).State = EntityState.Modified;
+                db.Entry(dbBook).CurrentValues.SetValues(book);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(book);
         }
-
+        private void UpdateBookCategories(int[] selectedCategories, Book bookToUpdate)
+        {
+            if (selectedCategories == null)
+            {
+                bookToUpdate.Categories.Clear();
+                return;
+            }
+            var selectedCategoriesHS = new HashSet<int>(selectedCategories);
+            var bookCategories = new HashSet<int>
+                (bookToUpdate.Categories.Select(c => c.CategoryId));
+            foreach (var category in db.Category)
+            {
+                if (selectedCategoriesHS.Contains(category.CategoryId))
+                {
+                    if (!bookCategories.Contains(category.CategoryId))
+                    {
+                        bookToUpdate.Categories.Add(category);
+                    }
+                }
+                else
+                {
+                    if (bookCategories.Contains(category.CategoryId))
+                    {
+                        bookToUpdate.Categories.Remove(category);
+                    }
+                }
+            }
+        }
         //
         // GET: /Book/Delete/5
         [Authorize]
@@ -111,7 +165,7 @@ namespace Cibrary.Controllers
         //Seach Function
         public ActionResult Index(string searchString)
         {
-            IQueryable<Book> book = from m in db.Books
+            IQueryable<Book> books = from m in db.Books
                        select m;
 
             if (!String.IsNullOrEmpty(searchString))
@@ -120,13 +174,11 @@ namespace Cibrary.Controllers
             int intString;
             int.TryParse(searchString, out intString);
 
-            book = book.Where(s => (s.Title.Contains(searchString) || (s.Author.Contains(searchString)) || (s.Description.Contains(searchString)) || (s.Edition.Contains(searchString)) || (s.Categories.Any(c => c.Name.Equals(searchString)))||(s.ReleaseYear==intString)));
+            books = books.Where(s => (s.Title.Contains(searchString) || (s.Author.Contains(searchString)) || (s.Description.Contains(searchString)) || (s.Edition.Contains(searchString)) || (s.Categories.Any(c => c.Name.Equals(searchString)))||(s.ReleaseYear==intString)));
                 
             }
 
-            //book = book.Where(s => (s.Loans.Any(c => (c.BookId.Equals(s.BookId)))));
-            
-            return View(book);
+            return View(books);
         }
 
     }

@@ -60,7 +60,7 @@ namespace Cibrary.Controllers
             }
 
             // If we got this far, something failed, redisplay form
-            ModelState.AddModelError(String.Empty, "The user name or password provided is incorrect.");
+            ModelState.AddModelError(String.Empty, "Brukernavnet eller passordet du oppga er feil.");
             return View(model);
         }
 
@@ -94,7 +94,7 @@ namespace Cibrary.Controllers
                     }
                     else
                     {
-                        ModelState.AddModelError(String.Empty, "Failed to create login for: " + model.UserName);
+                        ModelState.AddModelError(String.Empty, "Kunne ikke opprette konto for: " + model.UserName);
                     }
                 }
                 catch (DbEntityValidationException e)
@@ -133,9 +133,9 @@ namespace Cibrary.Controllers
         public async Task<ActionResult> Manage(ManageMessageId? message)
         {
             ViewBag.StatusMessage =
-                message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
-                : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
-                : message == ManageMessageId.RemoveLoginSuccess ? "The external login was removed."
+                message == ManageMessageId.ChangePasswordSuccess ? "Passordet ditt har blitt endret."
+                : message == ManageMessageId.SetPasswordSuccess ? "Passordet ditt har blitt satt."
+                : message == ManageMessageId.RemoveLoginSuccess ? "Kontoinformasjonen ble fjernet."
                 : String.Empty;
             string localUserName = await Logins.GetProviderKey(User.Identity.GetUserId(), IdentityConfig.LocalLoginProvider);
             ViewBag.UserName = localUserName;
@@ -166,7 +166,7 @@ namespace Cibrary.Controllers
                     }
                     else
                     {
-                        ModelState.AddModelError(String.Empty, "The current password is incorrect or the new password is invalid.");
+                        ModelState.AddModelError(String.Empty, "Passordet du oppga er feil eller det nye passordet er ugyldig.");
                     }
                 }
             }
@@ -192,7 +192,7 @@ namespace Cibrary.Controllers
                         }
                         else
                         {
-                            ModelState.AddModelError(String.Empty, "Failed to set password");
+                            ModelState.AddModelError(String.Empty, "Kunne ikke sette passord");
                         }
                     }
                     catch (Exception e)

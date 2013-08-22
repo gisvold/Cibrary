@@ -65,7 +65,7 @@
 
         <div class="control-group">
             <label class="control-label" for="Categories">Kategorier</label>
-            <div class="controls">
+            <div class="controls" id="Categories">
                 <table>
                     <tr>
                     @{
@@ -80,15 +80,18 @@
                             }
                         
                             @:<td>
-                                <input type="checkbox"
-                                       name="selectedCategory"
-                                       value="@category.CategoryId" />
-                                 @:  @category.Name
+                            <label class="checkbox">
+                            <input type="checkbox" name="selectedCategories" value="@category.CategoryId" />
+                            @category.Name
+                        </label>
                             @:</td>
                         }
                         @:</tr>
                     }
                 </table>
+                <span>
+                    @Html.ActionLink("Legg til ny kategori", "Create", "Category")
+                            </span>
                 </div>
                         </div>
 
