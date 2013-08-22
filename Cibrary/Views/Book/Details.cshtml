@@ -45,9 +45,21 @@
 			@Html.DisplayNameFor(model => model.Edition)
 		</dt>
 
-		<dd>
-			@Html.DisplayFor(model => model.Edition)
-		</dd>
+	    <dd>
+	        @Html.DisplayFor(model => model.Edition)
+	    </dd>
+	    <dt>
+	        @Html.DisplayNameFor(model => model.Categories)
+	    </dt>
+        <dd>
+            @{
+                foreach (var category in Model.Categories)
+                {
+                        <p>@category.Name</p>
+
+                }
+                }
+            </dd>
 
 	</dl>
 </fieldset>

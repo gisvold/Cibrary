@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
+using System.Security.Permissions;
 using System.Web;
 using System.Web.Mvc;
 using Cibrary.Models;
@@ -44,8 +46,22 @@ namespace Cibrary.Controllers
         // POST: /Book/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Book book)
+        public ActionResult Create(Book book, int[] selectedCategories)
         {
+            if (book.Categories == null)
+            {
+                book.Categories = new Collection<Category>();
+            }
+
+            foreach (var selectedCategory in selectedCategories)
+            {
+                var category = db.Category.Find(selectedCategory);
+
+                book.Categories.Add(category);
+            }
+
+
+
             if (ModelState.IsValid)
             {
                 db.Books.Add(book);
@@ -61,6 +77,7 @@ namespace Cibrary.Controllers
         public ActionResult Edit(Int32 id)
         {
             Book book = db.Books.Find(id);
+            ViewBag.Categories = db.Category.ToList();
             if (book == null)
             {
                 return HttpNotFound();
@@ -72,17 +89,54 @@ namespace Cibrary.Controllers
         // POST: /Book/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Book book)
+        public ActionResult Edit(Book book, int[] selectedCategories)
         {
+            var dbBook = db.Books.Find(book.BookId);
+            var oldCategories = dbBook.Categories;
+            book.Categories = new Collection<Category>();
+            if (oldCategories != null)
+            {
+                book.Categories = oldCategories;
+            }
+            
+
+            UpdateBookCategories(selectedCategories,book);
             if (ModelState.IsValid)
             {
-                db.Entry(book).State = EntityState.Modified;
+                db.Entry(dbBook).CurrentValues.SetValues(book);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(book);
         }
-
+        private void UpdateBookCategories(int[] selectedCategories, Book bookToUpdate)
+        {
+            if (selectedCategories == null)
+            {
+                bookToUpdate.Categories.Clear();
+                return;
+            }
+            var selectedCategoriesHS = new HashSet<int>(selectedCategories);
+            var bookCategories = new HashSet<int>
+                (bookToUpdate.Categories.Select(c => c.CategoryId));
+            foreach (var category in db.Category)
+            {
+                if (selectedCategoriesHS.Contains(category.CategoryId))
+                {
+                    if (!bookCategories.Contains(category.CategoryId))
+                    {
+                        bookToUpdate.Categories.Add(category);
+                    }
+                }
+                else
+                {
+                    if (bookCategories.Contains(category.CategoryId))
+                    {
+                        bookToUpdate.Categories.Remove(category);
+                    }
+                }
+            }
+        }
         //
         // GET: /Book/Delete/5
         public ActionResult Delete(Int32 id)
