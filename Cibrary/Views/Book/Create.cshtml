@@ -80,13 +80,18 @@
                             }
                         
                             @:<td>
-                                <input type="checkbox" name="selectedCategories" value="@category.CategoryId" />
-                                 @:  @category.Name
+                            <label class="checkbox">
+                            <input type="checkbox" name="selectedCategories" value="@category.CategoryId" />
+                            @category.Name
+                        </label>
                             @:</td>
                         }
                         @:</tr>
                     }
                 </table>
+                <span>
+                    @Html.ActionLink("Legg til ny kategori", "Create", "Category")
+                            </span>
                 </div>
                         </div>
 

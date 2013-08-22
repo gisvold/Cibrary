@@ -79,12 +79,18 @@
                             {@:</tr ><tr >
                             }@:
                             <td>
-                                <input type="checkbox" name="selectedCategories" value="@category.CategoryId" @(Html.Raw(category.Books.Contains(Model)? "checked=\"checked\"":""))/>
-                            @category.Name
+                                <label class="checkbox">
+                                    <input type="checkbox" name="selectedCategories" value="@category.CategoryId" @( Html.Raw(category.Books.Contains(Model) ? "checked=\"checked\"" : "") ) /> 
+                                    @category.Name 
+                                </label>
                             </td>
                         }@:</tr >
                     }</table>
+                <span>
+                    @Html.ActionLink("Legg til ny kategori", "Create", "Category")
+                            </span>
             </div>
+            
         </div>
         <div class="form-actions no-color">
             <input type="submit" value="Lagre" class="btn" />
