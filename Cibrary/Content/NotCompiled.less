@@ -2,6 +2,8 @@
 @darkpurple-color: #320255;
 @lightpurple-color: #7635A5;
 @green-color: #c0d72f;
+@darkgreen-color: #869621;
+@lightgreen-color: #CDDF59;
 @gray-color: #6e6e6e;
 
 body {
@@ -96,4 +98,26 @@ font-weight: bold;
             box-shadow:none !important;
         }
     }
+}
+
+.accordion-group {
+    border-color: @lightgreen-color;
+}
+
+.accordion-heading {
+    background-color: @green-color;
+    
+}
+
+.accordion-heading a {
+    font-weight: bold;
+    color: black;
+}
+
+.accordion-heading p {
+    font-style: italic;
+}
+
+.accordion-heading:hover {
+    background-color: @darkgreen-color;
 }

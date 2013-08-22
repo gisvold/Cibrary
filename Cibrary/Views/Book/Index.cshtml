@@ -14,86 +14,46 @@
     }
     
 
-<table class="table table-hover">
-    <tr>
-        
-        <th>
-            @Html.DisplayNameFor(model => model.Title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Author)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ReleaseYear)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ExternalLink)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Edition)
-        </th>
-        <th>
-            Handling
-        </th>
-        <th>
-            Utlånt/ikke utlånt
-        </th>
-    </tr>
 
-    @foreach (var item in Model)
-    {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Author)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ReleaseYear)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ExternalLink)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Edition)
-        </td>
-        <td>
-                @Html.ActionLink("Rediger", "Edit", new { id = item.BookId }) |
-                @Html.ActionLink("Detaljer", "Details", new { id = item.BookId }) |
-                @Html.ActionLink("Slett", "Delete", new { id = item.BookId })
-        </td>
-    </tr>
-}
 
-</table>
+
+<div class="accordion" id="booklist">
+    
+        @foreach (var item in Model)
+        {
+        <div class="accordion-group">
+    <div class="accordion-heading">
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="booklist" href="#@Html.DisplayFor(m => item.BookId)">
+            @Html.DisplayFor(modelItem => item.Title) (utgave @Html.DisplayFor(modelItem => item.Edition))<br>
+            <span style="font-style:italic; font-weight: normal; margin-left: 5px;">Av: @Html.DisplayFor(modelItem => item.Author), utgitt @Html.DisplayFor(modelItem => item.ReleaseYear)</span>
+        </a>
+    </div>
+    <div id="@Html.DisplayFor(m => item.BookId)" class="accordion-body collapse">
+        <div class="accordion-inner">
+
+                    <p>@Html.DisplayFor(modelItem => item.Description)</p>
+                    
+                        <table>
+                            <tr>
+                                <td>Kategorier: </td>
+                                @foreach (var kat in item.Categories)
+                                {
+                                   <td>@Html.ActionLink(kat.Name, "Index", new { searchString = kat.Name })</td>
+                                }
+                            </tr>
+                        </table><br>
+                    
+                    
+            @Html.ActionLink("Rediger", "Edit", new { id = item.BookId }) | @Html.ActionLink("Slett", "Delete", new { id = item.BookId })
+        </div>
+    </div>
+</div>
+        }
+
+   
+</div>
+
 <p>
     <i class="icon-plus"></i>
     @Html.ActionLink("Legg til bok", "Create")
 </p>
-
-<div class="accordion" id="booklist">
-
-    @foreach (var book in Model) {
-        <div class="accordion-group">
-        <div class="accordion-heading">
-            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
-                @Html.DisplayFor(modelItem => book.Title)
-            </a>
-        </div>
-        <div id="collapseOne" class="accordion-body collapse in">
-            <div class="accordion-inner">
-                Anim pariatur cliche...
-            </div>
-        </div>
-    </div>
-    }
-
-    
-</div>
