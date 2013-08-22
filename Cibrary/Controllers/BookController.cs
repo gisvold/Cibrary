@@ -117,24 +117,21 @@ namespace Cibrary.Controllers
         //new code 21/08
         public ActionResult Index(string searchString)
         {
-            IQueryable<Book> book = from m in db.Books
+            IQueryable<Book> books = from m in db.Books
                        select m;
 
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                string copyString = string.Copy(searchString);
-                int AsciiString = (int) copyString[0];
+                int AsciiString = (int)searchString[0];
                 int intString =0;
                 if (!(AsciiString < 48 || AsciiString > 57))
-                    intString = Convert.ToInt32(copyString);
-                
-
-                book = book.Where(s => (s.Title.Contains(searchString) || (s.Author.Contains(searchString)) || (s.Description.Contains(searchString)) || (s.Edition.Contains(searchString)) || (s.Categories.Any(c => c.Name.Equals(searchString)))||(s.ReleaseYear==intString)));
+                    intString = Convert.ToInt32(searchString);
+                books = books.Where(s => (s.Title.Contains(searchString) || (s.Author.Contains(searchString)) || (s.Description.Contains(searchString)) || (s.Edition.Contains(searchString)) || (s.Categories.Any(c => c.Name.Equals(searchString)))||(s.ReleaseYear==intString)));
                 
             }
 
-            return View(book);
+            return View(books);
         }
 
     }

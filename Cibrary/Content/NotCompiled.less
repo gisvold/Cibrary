@@ -72,3 +72,28 @@ font-weight: bold;
     background-image: none;
     background-color: @lightpurple-color;
 }
+
+
+
+#SearchBoxContainer {
+    text-align:center;
+
+    .submitsearch {
+        padding: 0 1em;
+        background: url(/img/search.png) no-repeat;
+        border: none;
+        margin-left: -1px;
+    }
+
+    #SearchString{
+        border: 1px solid @purple-color;
+        -webkit-appearance: textfield;
+        font-size: 12px;
+        margin: 0 0 0 0;
+        padding: 2px;
+
+        &:focus{
+            box-shadow:none !important;
+        }
+    }
+}

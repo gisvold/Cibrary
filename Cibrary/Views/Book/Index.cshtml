@@ -5,17 +5,16 @@
 }
 
 
-    @Html.ActionLink("Create New", "Create")
     @using (Html.BeginForm())
     {
-    <p>
+    <p id="SearchBoxContainer">
         @Html.TextBox("SearchString") 
-        <input type="submit" value="search" />
+        <input type="submit" class="submitsearch" value=""/>
     </p>
     }
     
 
-<table class="table">
+<table class="table table-hover">
     <tr>
         
         <th>
