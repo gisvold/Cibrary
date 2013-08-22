@@ -35,9 +35,14 @@
         <th>
             @Html.DisplayNameFor(model => model.Edition)
         </th>
-        <th></th>
+        <th>
+            Handling
+        </th>
+        <th>
+            Utlånt/ikke utlånt
+        </th>
     </tr>
-
+    
     @foreach (var item in Model)
     {
     <tr>

@@ -16,16 +16,8 @@ namespace Cibrary.Controllers
     {
         private DataContext db = new DataContext();
 
-
-        //
-        // GET: /Book/
-    /*    public ActionResult Index()
-        {
-            return View(db.Books.ToList());
-        }
-     */   
-        //
         // GET: /Book/Details/5
+        [Authorize]
         public ActionResult Details(Int32 id)
         {
             Book book = db.Books.Find(id);
@@ -76,6 +68,7 @@ namespace Cibrary.Controllers
 
         //
         // GET: /Book/Edit/5
+        [Authorize]
         public ActionResult Edit(Int32 id)
         {
             Book book = db.Books.Find(id);
@@ -141,6 +134,7 @@ namespace Cibrary.Controllers
         }
         //
         // GET: /Book/Delete/5
+        [Authorize]
         public ActionResult Delete(Int32 id)
         {
             Book book = db.Books.Find(id);
@@ -200,23 +194,23 @@ namespace Cibrary.Controllers
             {
                 db.SaveChanges();
             }
-            
+
 
             return RedirectToAction("Index");
 
         }
         //new code 21/08
+        //Seach Function
         public ActionResult Index(string searchString)
         {
             IQueryable<Book> books = from m in db.Books select m;
 
-
             if (!String.IsNullOrEmpty(searchString))
             {
-                int AsciiString = (int)searchString[0];
-                int intString =0;
-                if (!(AsciiString < 48 || AsciiString > 57))
-                    intString = Convert.ToInt32(searchString);
+
+            int intString;
+            int.TryParse(searchString, out intString);
+
                 books = books.Where(s => (s.Title.Contains(searchString) || (s.Author.Contains(searchString)) || (s.Description.Contains(searchString)) || (s.Edition.Contains(searchString)) || (s.Categories.Any(c => c.Name.Equals(searchString)))||(s.ReleaseYear==intString)));
                 
             }
