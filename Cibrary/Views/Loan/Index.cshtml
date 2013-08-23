@@ -1,44 +1,129 @@
+@using Microsoft.AspNet.Identity
 @model IEnumerable<Cibrary.Models.Loan>
 
 @{
-    ViewBag.Title = "Lånte bøker";
+    ViewBag.Title = "Andre lånte bøker";
 }
+<h2>Mine lånte bøker</h2>
 
+<div class="accordion" id="booklist">
+
+    @foreach (var item in Model)
+    {
+        if (item.UserId == User.Identity.GetUserId())
+        {
+            
+            var timeSinceLoaned = (int)(DateTime.Now - item.TimeLoaned).TotalSeconds;
+            var timeSinceLoanedString = timeSinceLoaned + " Sekunder siden";
+
+            if (timeSinceLoaned > 59)
+            {
+                timeSinceLoaned = (int)(DateTime.Now-item.TimeLoaned).TotalMinutes;
+                timeSinceLoanedString = timeSinceLoaned + " Minutter siden";
+                if (timeSinceLoaned > 59)
+                {
+                    timeSinceLoaned = (int)(DateTime.Now - item.TimeLoaned).TotalHours;
+                    timeSinceLoanedString = timeSinceLoaned + " Timer siden";
+                    if (timeSinceLoaned > 23)
+                    {
+                        timeSinceLoaned = (int)(DateTime.Now - item.TimeLoaned).TotalDays;
+                        timeSinceLoanedString = timeSinceLoaned + " Dager siden";
+                    }
+                }
+            }
+            
+            
+            
+            
+
+             <div class="accordion-group">
+                 <div class="accordion-heading">
+                     <a class="accordion-toggle" data-toggle="collapse" data-parent="booklist" href="#@Html.DisplayFor(m => item.BookId)">
+                         @Html.DisplayFor(modelItem => item.Book.Title) (utgave @Html.DisplayFor(modelItem => item.Book.Edition))<br>
+                         <span style="font-style: italic; font-weight: normal; margin-left: 5px;">Av: @Html.DisplayFor(modelItem => item.Book.Author), utgitt @Html.DisplayFor(modelItem => item.Book.ReleaseYear)</span>
+                         <span style="float: right">Lånt av: @Html.DisplayFor(modelItem => item.UserProfile.UserName) | @Html.DisplayFor(modelItem => timeSinceLoanedString)</span>
+
+
+                     </a>
+                 </div>
+                 <div id="@Html.DisplayFor(m => item.BookId)" class="accordion-body collapse">
+                     <div class="accordion-inner">
+                         <p>@Html.DisplayFor(modelItem => item.Book.Description)</p>
+
+                         <table>
+                             <tr>
+                                 <td>Kategorier: </td>
+                                 @foreach (var kat in item.Book.Categories)
+                                 {
+                                     <td>@Html.ActionLink(kat.Name, "Index", new {searchString = kat.Name})</td>
+                                 }
+                             </tr>
+                         </table><br>
+
+
+                         @Html.ActionLink("Rediger", "Edit", new {id = item.BookId}) | @Html.ActionLink("Slett", "Delete", new {id = item.BookId})
+                     </div>
+                 </div>
+             </div>
+         }
+    }
+
+</div>
 <h2>@ViewBag.Title</h2>
 
 <div class="accordion" id="booklist">
 
     @foreach (var item in Model)
     {
-        <div class="accordion-group">
-            <div class="accordion-heading">
-                <a class="accordion-toggle" data-toggle="collapse" data-parent="booklist" href="#@Html.DisplayFor(m => item.BookId)">
-                    @Html.DisplayFor(modelItem => item.Book.Title) (utgave @Html.DisplayFor(modelItem => item.Book.Edition))<br>
-                    <span style="font-style:italic; font-weight: normal; margin-left: 5px;">Av: @Html.DisplayFor(modelItem => item.Book.Author), utgitt @Html.DisplayFor(modelItem => item.Book.ReleaseYear)</span>
-                    <span style="float: right">Lånt av: @Html.DisplayFor(modelItem => item.UserProfile.UserName), : @Html.DisplayFor(modelItem => item.TimeLoaned) </span>
+        if (item.UserId != User.Identity.GetUserId())
+        {
+            var timeSinceLoaned = (int)(DateTime.Now - item.TimeLoaned).TotalSeconds;
+            var timeSinceLoanedString = timeSinceLoaned + " Sekunder siden";
+
+            if (timeSinceLoaned > 59)
+            {
+                timeSinceLoaned = (int)(DateTime.Now - item.TimeLoaned).TotalMinutes;
+                timeSinceLoanedString = timeSinceLoaned + " Minutter siden";
+                if (timeSinceLoaned > 59)
+                {
+                    timeSinceLoaned = (int)(DateTime.Now - item.TimeLoaned).TotalHours;
+                    timeSinceLoanedString = timeSinceLoaned + " Timer siden";
+                    if (timeSinceLoaned > 23)
+                    {
+                        timeSinceLoaned = (int)(DateTime.Now - item.TimeLoaned).TotalDays;
+                        timeSinceLoanedString = timeSinceLoaned + " Dager siden";
+                    }
+                }
+            }
+            <div class="accordion-group">
+                <div class="accordion-heading">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="booklist" href="#@Html.DisplayFor(m => item.BookId)">
+                        @Html.DisplayFor(modelItem => item.Book.Title) (utgave @Html.DisplayFor(modelItem => item.Book.Edition))<br>
+                        <span style="font-style: italic; font-weight: normal; margin-left: 5px;">Av: @Html.DisplayFor(modelItem => item.Book.Author), utgitt @Html.DisplayFor(modelItem => item.Book.ReleaseYear)</span>
+                        <span style="float: right">Lånt av: @Html.DisplayFor(modelItem => item.UserProfile.UserName) | @Html.DisplayFor(modelItem => timeSinceLoanedString) </span>
                    
                     
-                </a>
-            </div>
-            <div id="@Html.DisplayFor(m => item.BookId)" class="accordion-body collapse">
-                <div class="accordion-inner">
-                    <p>@Html.DisplayFor(modelItem => item.Book.Description)</p>
+                    </a>
+                </div>
+                <div id="@Html.DisplayFor(m => item.BookId)" class="accordion-body collapse">
+                    <div class="accordion-inner">
+                        <p>@Html.DisplayFor(modelItem => item.Book.Description)</p>
 
-                    <table>
-                        <tr>
-                            <td>Kategorier: </td>
-                            @foreach (var kat in item.Book.Categories)
-                            {
-                                <td>@Html.ActionLink(kat.Name, "Index", new { searchString = kat.Name })</td>
-                            }
-                        </tr>
-                    </table><br>
+                        <table>
+                            <tr>
+                                <td>Kategorier: </td>
+                                @foreach (var kat in item.Book.Categories)
+                                {
+                                    <td>@Html.ActionLink(kat.Name, "Index", new {searchString = kat.Name})</td>
+                                }
+                            </tr>
+                        </table><br>
 
 
-                    @Html.ActionLink("Rediger", "Edit", new { id = item.BookId }) | @Html.ActionLink("Slett", "Delete", new { id = item.BookId })
+                        @Html.ActionLink("Rediger", "Edit", new {id = item.BookId}) | @Html.ActionLink("Slett", "Delete", new {id = item.BookId})
+                    </div>
                 </div>
             </div>
-        </div>
+        }
     }
-
 </div>
