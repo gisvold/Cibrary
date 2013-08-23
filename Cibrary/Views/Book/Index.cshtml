@@ -1,6 +1,5 @@
 @using Cibrary.Models
 @using Microsoft.Ajax.Utilities
-@using Microsoft.AspNet.Identity
 @model IEnumerable<Cibrary.Models.Book>
 
 @{
@@ -27,7 +26,11 @@
         <div class="accordion-group">
             <div class="accordion-heading">
                 <a class="accordion-toggle" data-toggle="collapse" data-parent="booklist" href="#@Html.DisplayFor(m => item.BookId)">
-                    @Html.DisplayFor(modelItem => item.Title) (utgave @Html.DisplayFor(modelItem => item.Edition))<br>
+                    @Html.DisplayFor(modelItem => item.Title) 
+                    @if(item.Edition != null){
+                        <span>(utgave @Html.DisplayFor(model => item.Edition))</span>
+                    }
+                        <br>
                     <span style="font-style:italic; font-weight: normal; margin-left: 5px;">Av: @Html.DisplayFor(modelItem => item.Author), utgitt @Html.DisplayFor(modelItem => item.ReleaseYear)</span>
                     @if (item.Loans.FirstOrDefault(l => l.TimeDelievered == null) == null)
                     {
@@ -39,8 +42,6 @@
                         {
                                   @Html.ActionLink("Lån", "LoanBook", new { id = item.BookId }, new {@class="accordion-button-loan pull-right"})
                         }
-                        
-                    }
                     else
                     {
 
