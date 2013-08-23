@@ -5,6 +5,7 @@
 @darkgreen-color: #869621;
 @lightgreen-color: #E6EFAC;
 @gray-color: #6e6e6e;
+@lightgray-color: #eeeeee;
 
 body {
     padding-top: 60px;
@@ -106,19 +107,20 @@ font-weight: bold;
 
 .accordion-heading {
     background-color: @green-color;
-
+    
     :hover {
         background-color: @darkgreen-color;
-    }
+        color: black;
+}
 
     a {
-        font-weight: bold;
-        color: black;
-    }
+    font-weight: bold;
+    color: black;
+}
 
     p {
-        font-style: italic;
-    }
+    font-style: italic;
+}
 }
 
 .tag a {
@@ -130,4 +132,42 @@ font-weight: bold;
 
 .tag a:hover {
     background-color: @green-color;
+}
+
+
+.categoryCheckbox{
+
+    padding: 2px;
+
+    label{
+        display:inline-block;
+        background: @lightgray-color;
+        padding:5px;
+
+        &:hover{
+            background: @green-color;
+        }
+    }
+
+    input[type="checkbox"]{
+        display: none;
+    }
+
+    input[type="checkbox"]:checked + label{
+        background-color: @lightgreen-color;
+
+    }
+
+}
+
+a {
+    color: @purple-color;
+
+    &:hover {
+        color: @lightpurple-color;
+    }
+    &:visited, &:link, &:active
+    {
+        text-decoration: none;
+    }
 }

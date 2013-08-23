@@ -27,6 +27,15 @@
         <a class="accordion-toggle" data-toggle="collapse" data-parent="booklist" href="#@Html.DisplayFor(m => item.BookId)">
             @Html.DisplayFor(modelItem => item.Title) (utgave @Html.DisplayFor(modelItem => item.Edition))<br>
             <span style="font-style:italic; font-weight: normal; margin-left: 5px;">Av: @Html.DisplayFor(modelItem => item.Author), utgitt @Html.DisplayFor(modelItem => item.ReleaseYear)</span>
+            @if (item.Loans.FirstOrDefault(l => l.TimeDelievered == null) == null)
+            {
+                <span style="float: right">@Html.ActionLink("Lån","LoanBook",new {id = item.BookId})</span>
+            }
+            else
+            {
+                <span style="float: right">Opptatt</span>
+            }
+             
         </a>
     </div>
     <div id="@Html.DisplayFor(m => item.BookId)" class="accordion-body collapse">
