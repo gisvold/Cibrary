@@ -1,5 +1,6 @@
 @using Cibrary.Models
 @using Microsoft.Ajax.Utilities
+@using Microsoft.AspNet.Identity
 @model IEnumerable<Cibrary.Models.Book>
 
 @{
@@ -30,7 +31,15 @@
                     <span style="font-style:italic; font-weight: normal; margin-left: 5px;">Av: @Html.DisplayFor(modelItem => item.Author), utgitt @Html.DisplayFor(modelItem => item.ReleaseYear)</span>
                     @if (item.Loans.FirstOrDefault(l => l.TimeDelievered == null) == null)
                     {
-                        <span style="float: right">@Html.ActionLink("Lån bok", "LoanBook", new { id = item.BookId })</span>
+                        if (item.Loans.FirstOrDefault(l => l.UserId == User.Identity.GetUserId() && l.BookId == item.BookId) != null)
+                            {
+                                 <span style="float: right">Beklager, du kan ikke låne en bok mer enn en gang :)</span>
+                            }
+                        else
+                        {
+                                  <span style="float: right">@Html.ActionLink("Lån bok", "LoanBook", new { id = item.BookId })</span>
+                        }
+                        
                     }
                     else
                     {
@@ -38,7 +47,8 @@
                         var firstOrDefault = item.Loans.FirstOrDefault(l => l.TimeDelievered == null);
                         if (firstOrDefault != null && HttpContext.Current.User.Identity.Name == firstOrDefault.UserProfile.UserName)
                         {
-                            <span style="float: right">Returner bok</span>
+                            
+                            <span style="float: right">@Html.ActionLink("Returner bok", "DeliverBook", new { id = item.BookId })</span>
 
                         }
                         else

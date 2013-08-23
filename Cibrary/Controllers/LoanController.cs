@@ -15,6 +15,7 @@ namespace Cibrary.Controllers
 
         public ActionResult Index()
         {
+
             return View(db.Loans.ToList());
         }
 

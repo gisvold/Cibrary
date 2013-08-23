@@ -202,6 +202,18 @@ namespace Cibrary.Controllers
             return RedirectToAction("Index");
 
         }
+
+        public ActionResult DeliverBook(Int32 id)
+        {
+            String userId = User.Identity.GetUserId();
+            Loan loanToDeliver = db.Loans.Find(id, userId);
+            loanToDeliver.TimeDelievered = DateTime.Now;
+            if (ModelState.IsValid)
+            {
+                db.SaveChanges();
+            }
+            return RedirectToAction("Index");
+        }
         //new code 21/08
         //Seach Function
         public ActionResult Index(string searchString)
