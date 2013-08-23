@@ -25,9 +25,7 @@
         <div class="accordion-group">
             <div class="accordion-heading">
                 <a class="accordion-toggle" data-toggle="collapse" data-parent="booklist" href="#@Html.DisplayFor(m => item.BookId)">
-                    @Html.DisplayFor(modelItem => item.Title)
-                    @if(item.Edition != null){                       
-                    }
+                    <span>@item.Title</span>
                     <br>
                     <span style="font-style:italic; font-weight: normal; margin-left: 5px;">Av: @Html.DisplayFor(modelItem => item.Author)</span>
                     @if (item.Loans.FirstOrDefault(l => l.TimeDelievered == null) == null)
