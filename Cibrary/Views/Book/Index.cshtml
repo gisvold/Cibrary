@@ -36,7 +36,7 @@
                     {
                         if (item.Loans.FirstOrDefault(l => l.UserId == User.Identity.GetUserId() && l.BookId == item.BookId) != null)
                         {
-                            <span style="float: right">Beklager, du kan ikke låne en bok mer enn en gang :)</span>
+                            <span class="accordion-button">Utilgjengelig</span>
                         }
                         else
                         {
