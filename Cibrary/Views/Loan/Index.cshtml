@@ -15,8 +15,8 @@
             <div class="accordion-group">
     <div class="accordion-heading">
         <a class="accordion-toggle" data-toggle="collapse" data-parent="booklist" href="#@Html.DisplayFor(m => item.BookId)">
-            @Html.DisplayFor(modelItem => item.Book.Title) (utgave @Html.DisplayFor(modelItem => item.Book.Edition))<br>
-            <span style="font-style: italic; font-weight: normal; margin-left: 5px;">Av: @Html.DisplayFor(modelItem => item.Book.Author), utgitt @Html.DisplayFor(modelItem => item.Book.ReleaseYear)</span>
+            <div style="max-width: 60%;">@item.Title</div><br>
+            <span style="font-style: italic; font-weight: normal; margin-left: 5px;">Av: @Html.DisplayFor(modelItem => item.Book.Author)</span>
             <span style="float: right">@Html.ActionLink("Returnér", "DeliverBook", new { id = item.BookId }, new { @class = "accordion-button-return pull-right" })</span>
 
             
