@@ -12,11 +12,22 @@ namespace Cibrary.Controllers
     public class CategoryController : Controller
     {
         private DataContext db = new DataContext();
-
+        public static string element = null;
+        public static int flag = 0;
         //
         // GET: /Category/
+        
         public ActionResult Index()
         {
+                return View(db.Category.ToList());
+ 
+        }
+
+        [HttpPost]
+        public ActionResult Index(Category category)
+        {
+            db.Category.Add(category);
+            db.SaveChanges();
             return View(db.Category.ToList());
         }
 
@@ -45,6 +56,7 @@ namespace Cibrary.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Category category)
         {
+            //ViewBag.name ="Dance";
             if (ModelState.IsValid)
             {
                 db.Category.Add(category);
@@ -110,6 +122,6 @@ namespace Cibrary.Controllers
         {
             db.Dispose();
             base.Dispose(disposing);
-        }
+        }      
     }
 }

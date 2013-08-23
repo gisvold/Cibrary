@@ -171,10 +171,10 @@ namespace Cibrary.Controllers
             if (!String.IsNullOrEmpty(searchString))
             {
 
-            int intString;
-            int.TryParse(searchString, out intString);
+                int intString;
+                int.TryParse(searchString, out intString);
 
-            books = books.Where(s => (s.Title.Contains(searchString) || (s.Author.Contains(searchString)) || (s.Description.Contains(searchString)) || (s.Edition.Contains(searchString)) || (s.Categories.Any(c => c.Name.Equals(searchString)))||(s.ReleaseYear==intString)));
+                books = books.Where(s => (s.Title.Contains(searchString) || (s.Author.Contains(searchString)) || (s.Description.Contains(searchString)) || (s.Edition.Contains(searchString)) || (s.Categories.Any(c => c.Name.Equals(searchString)))||(s.ReleaseYear==intString)));
                 
             }
 
