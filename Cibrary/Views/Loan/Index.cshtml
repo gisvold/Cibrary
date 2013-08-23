@@ -16,9 +16,11 @@
     <div class="accordion-heading">
         <a class="accordion-toggle" data-toggle="collapse" data-parent="booklist" href="#@Html.DisplayFor(m => item.BookId)">
             @Html.DisplayFor(modelItem => item.Book.Title) (utgave @Html.DisplayFor(modelItem => item.Book.Edition))<br>
-            <span style="font-style: italic; font-weight: normal; margin-left: 5px;">Av: @Html.DisplayFor(modelItem => item.Book.Author), utgitt @Html.DisplayFor(modelItem => item.Book.ReleaseYear)</span><br/>
-            <span>Lånt av: @Html.DisplayFor(modelItem => item.UserProfile.UserName) | @item.AgeOfLoan()</span>
-            <span style="float: right">@Html.ActionLink("Returnér", "DeliverBook",  new { id = item.BookId }, new { @class = "accordion-button-return pull-right" })</span>
+            <span style="font-style: italic; font-weight: normal; margin-left: 5px;">Av: @Html.DisplayFor(modelItem => item.Book.Author), utgitt @Html.DisplayFor(modelItem => item.Book.ReleaseYear)</span>
+            <span style="float: right">@Html.ActionLink("Returnér", "DeliverBook", new { id = item.BookId }, new { @class = "accordion-button-return pull-right" })</span>
+
+            
+            
 
 
         </a>
@@ -29,10 +31,11 @@
             <div>
                 Kategorier:
                 @foreach (var kat in item.Book.Categories)
-                        {
+                {
                     <span class="tag">@Html.ActionLink(kat.Name, "Index", "Book", new { searchString = kat.Name },null)</span>
-                        }
+                }
             </div>
+            <span style="float: right">Lånt av: @Html.DisplayFor(modelItem => item.UserProfile.UserName) | @item.AgeOfLoan()</span>
 
 
         </div>
@@ -57,7 +60,6 @@
                     <a class="accordion-toggle" data-toggle="collapse" data-parent="booklist" href="#@Html.DisplayFor(m => item.BookId)">
                         @Html.DisplayFor(modelItem => item.Book.Title) (utgave @Html.DisplayFor(modelItem => item.Book.Edition))<br>
                         <span style="font-style: italic; font-weight: normal; margin-left: 5px;">Av: @Html.DisplayFor(modelItem => item.Book.Author), utgitt @Html.DisplayFor(modelItem => item.Book.ReleaseYear)</span>
-                        <span style="float: right">Lånt av: @Html.DisplayFor(modelItem => item.UserProfile.UserName) | @item.AgeOfLoan() </span>
                    
                     
                     </a>
@@ -72,7 +74,7 @@
                                                                 <span class="tag">@Html.ActionLink(kat.Name, "Index", "Book", new { searchString = kat.Name }, null)</span>
                         }
                                                         </div>
-
+                        <span style="float: right">Lånt av: @Html.DisplayFor(modelItem => item.UserProfile.UserName) | @item.AgeOfLoan()</span>
 
                                                     </div>
                 </div>
