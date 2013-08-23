@@ -23,6 +23,7 @@ namespace Cibrary.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public ActionResult Index(Category category)
         {
             db.Category.Add(category);
@@ -44,6 +45,7 @@ namespace Cibrary.Controllers
 
         //
         // GET: /Category/Create
+        [Authorize]
         public ActionResult Create()
         {
             return View();
@@ -53,6 +55,7 @@ namespace Cibrary.Controllers
         // POST: /Category/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Create(Category category)
         {
             if (ModelState.IsValid)
@@ -67,6 +70,7 @@ namespace Cibrary.Controllers
 
         //
         // GET: /Category/Edit/5
+        [Authorize]
         public ActionResult Edit(Int32 id)
         {
             Category category = db.Category.Find(id);
@@ -81,6 +85,7 @@ namespace Cibrary.Controllers
         // POST: /Category/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Edit(Category category)
         {
             if (ModelState.IsValid)
@@ -94,6 +99,7 @@ namespace Cibrary.Controllers
 
         //
         // GET: /Category/Delete/5
+        [Authorize]
         public ActionResult Delete(Int32 id)
         {
             Category category = db.Category.Find(id);
@@ -108,6 +114,7 @@ namespace Cibrary.Controllers
         // POST: /Category/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult DeleteConfirmed(Int32 id)
         {
             Category category = db.Category.Find(id);

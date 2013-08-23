@@ -18,9 +18,8 @@
             @Html.DisplayFor(modelItem => item.Name)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.CategoryId })
-            @Html.ActionLink("Details", "Details", new { id=item.CategoryId }) 
-            @Html.ActionLink("Delete", "Delete", new { id=item.CategoryId })
+            @Html.ActionLink("Rediger", "Edit", new { id=item.CategoryId }) |
+            @Html.ActionLink("Slett", "Delete", new { id=item.CategoryId }) 
         </td>
     </tr>
 }
@@ -33,7 +32,7 @@
            
             @Html.TextBox("name") 
             <i class="icon-plus"></i>
-            <input type="submit" class="submitcategori" value="legg til ny kategori" />
+            <input id="leggtilkategori" type="submit" class="submitcategori" value="Legg til ny kategori"/>
            
     }
 <p> <!-- Html.ActionLink("Legg til kategori", "Create")--></p> 
