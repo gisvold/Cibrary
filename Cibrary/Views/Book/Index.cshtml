@@ -1,4 +1,5 @@
 @using Cibrary.Models
+@using Microsoft.Ajax.Utilities
 @model IEnumerable<Cibrary.Models.Book>
 
 @{
@@ -6,60 +7,72 @@
 }
 
 
-    @using (Html.BeginForm())
-    {
+@using (Html.BeginForm())
+{
     <p id="SearchBoxContainer">
-        @Html.TextBox("SearchString") 
-        <input type="submit" class="submitsearch" value=""/>
+        @Html.TextBox("SearchString")
+        <input type="submit" class="submitsearch" value="" />
     </p>
-    }
-    
+}
+
 
 
 
 
 <div class="accordion" id="booklist">
-    
-        @foreach (var item in Model)
-        {
+
+    @foreach (var item in Model)
+    {
         <div class="accordion-group">
-    <div class="accordion-heading">
-        <a class="accordion-toggle" data-toggle="collapse" data-parent="booklist" href="#@Html.DisplayFor(m => item.BookId)">
-            @Html.DisplayFor(modelItem => item.Title) (utgave @Html.DisplayFor(modelItem => item.Edition))<br>
-            <span style="font-style:italic; font-weight: normal; margin-left: 5px;">Av: @Html.DisplayFor(modelItem => item.Author), utgitt @Html.DisplayFor(modelItem => item.ReleaseYear)</span>
-            @if (item.Loans.FirstOrDefault(l => l.TimeDelievered == null) == null)
-            {
-                <span style="float: right">@Html.ActionLink("Lån","LoanBook",new {id = item.BookId})</span>
-            }
-            else
-            {
-                <span style="float: right">Opptatt</span>
-            }
-             
-        </a>
-    </div>
-    <div id="@Html.DisplayFor(m => item.BookId)" class="accordion-body collapse">
-        <div class="accordion-inner">
+            <div class="accordion-heading">
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="booklist" href="#@Html.DisplayFor(m => item.BookId)">
+                    @Html.DisplayFor(modelItem => item.Title) (utgave @Html.DisplayFor(modelItem => item.Edition))<br>
+                    <span style="font-style:italic; font-weight: normal; margin-left: 5px;">Av: @Html.DisplayFor(modelItem => item.Author), utgitt @Html.DisplayFor(modelItem => item.ReleaseYear)</span>
+                    @if (item.Loans.FirstOrDefault(l => l.TimeDelievered == null) == null)
+                    {
+                        <span style="float: right">@Html.ActionLink("Lån bok", "LoanBook", new { id = item.BookId })</span>
+                    }
+                    else
+                    {
+
+                        var firstOrDefault = item.Loans.FirstOrDefault(l => l.TimeDelievered == null);
+                        if (firstOrDefault != null && HttpContext.Current.User.Identity.Name == firstOrDefault.UserProfile.UserName)
+                        {
+                            <span style="float: right">Returner bok</span>
+
+                        }
+                        else
+                        {
+                            <span style="float: right">Utlånt</span>
+                        }
+
+
+                    }
+
+                </a>
+            </div>
+            <div id="@Html.DisplayFor(m => item.BookId)" class="accordion-body collapse">
+                <div class="accordion-inner">
 
                     <p>@Html.DisplayFor(modelItem => item.Description)</p>
                     <div>
-                                Kategorier:
-                                @foreach (var kat in item.Categories)
-                                {
-                                    <span class="tag">
-                                        @Html.ActionLink(kat.Name, "Index", new { searchString = kat.Name })
-                                   </span>
-                                }
+                        Kategorier:
+                        @foreach (var kat in item.Categories)
+                        {
+                            <span class="tag">
+                                @Html.ActionLink(kat.Name, "Index", new { searchString = kat.Name })
+                            </span>
+                        }
                     </div>
-            <br>
-            
-            @Html.ActionLink("Rediger", "Edit", new { id = item.BookId }) | @Html.ActionLink("Slett", "Delete", new { id = item.BookId })
-        </div>
-    </div>
-</div>
-        }
+                    <br>
 
-   
+                    @Html.ActionLink("Rediger", "Edit", new { id = item.BookId }) | @Html.ActionLink("Slett", "Delete", new { id = item.BookId })
+                </div>
+            </div>
+        </div>
+    }
+
+
 </div>
 <span class="pull-right">
     @{
@@ -69,7 +82,8 @@
     @{
         int total = Model.Count();
     }
-    @Html.DisplayFor(t => total) totalt )</span>
+    @Html.DisplayFor(t => total) totalt )
+</span>
 <p>
     <i class="icon-plus"></i>
     @Html.ActionLink("Legg til bok", "Create")
