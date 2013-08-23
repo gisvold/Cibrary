@@ -13,37 +13,34 @@
         if (item.UserId == User.Identity.GetUserId())
         {
             <div class="accordion-group">
-                 <div class="accordion-heading">
-                     <a class="accordion-toggle" data-toggle="collapse" data-parent="booklist" href="#@Html.DisplayFor(m => item.BookId)">
-                         @Html.DisplayFor(modelItem => item.Book.Title) (utgave @Html.DisplayFor(modelItem => item.Book.Edition))<br>
-                         <span style="font-style: italic; font-weight: normal; margin-left: 5px;">Av: @Html.DisplayFor(modelItem => item.Book.Author), utgitt @Html.DisplayFor(modelItem => item.Book.ReleaseYear)</span>
-                         <span style="float: right">Lånt av: @Html.DisplayFor(modelItem => item.UserProfile.UserName) | @item.AgeOfLoan()</span>
+    <div class="accordion-heading">
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="booklist" href="#@Html.DisplayFor(m => item.BookId)">
+            @Html.DisplayFor(modelItem => item.Book.Title) (utgave @Html.DisplayFor(modelItem => item.Book.Edition))<br>
+            <span style="font-style: italic; font-weight: normal; margin-left: 5px;">Av: @Html.DisplayFor(modelItem => item.Book.Author), utgitt @Html.DisplayFor(modelItem => item.Book.ReleaseYear)</span>
+            <span style="float: right">Lånt av: @Html.DisplayFor(modelItem => item.UserProfile.UserName) | @item.AgeOfLoan()</span>
 
 
-                     </a>
-                 </div>
-                 <div id="@Html.DisplayFor(m => item.BookId)" class="accordion-body collapse">
-                     <div class="accordion-inner">
-                         <p>@Html.DisplayFor(modelItem => item.Book.Description)</p>
-
-                         <table>
-                             <tr>
-                                 <td>Kategorier: </td>
-                                 @foreach (var kat in item.Book.Categories)
-                                 {
-                                     <td>@Html.ActionLink(kat.Name, "Index", new {searchString = kat.Name})</td>
-                                 }
-                             </tr>
-                         </table><br>
+        </a>
+    </div>
+    <div id="@Html.DisplayFor(m => item.BookId)" class="accordion-body collapse">
+        <div class="accordion-inner">
+            <p>@Html.DisplayFor(modelItem => item.Book.Description)</p>
+            <div>
+                Kategorier:
+                @foreach (var kat in item.Book.Categories)
+                        {
+                    <span class="tag">@Html.ActionLink(kat.Name, "Index", "Book", new { searchString = kat.Name },null)</span>
+                        }
+            </div>
 
 
-                     </div>
-                 </div>
-             </div>
-         }
+        </div>
+        </div>
+    </div>
     }
-
+    }
 </div>
+        
 <h2>@ViewBag.Title</h2>
 
 <div class="accordion" id="booklist">
@@ -67,19 +64,16 @@
                 <div id="@Html.DisplayFor(m => item.BookId)" class="accordion-body collapse">
                     <div class="accordion-inner">
                         <p>@Html.DisplayFor(modelItem => item.Book.Description)</p>
-
-                        <table>
-                            <tr>
-                                <td>Kategorier: </td>
-                                @foreach (var kat in item.Book.Categories)
-                                {
-                                    <td>@Html.ActionLink(kat.Name, "Index", new {searchString = kat.Name})</td>
-                                }
-                            </tr>
-                        </table><br>
+                                        <div>
+                                            Kategorier:
+                                            @foreach (var kat in item.Book.Categories)
+                        {
+                                                                <span class="tag">@Html.ActionLink(kat.Name, "Index", "Book", new { searchString = kat.Name }, null)</span>
+                        }
+                                                        </div>
 
 
-                    </div>
+                                                    </div>
                 </div>
             </div>
         }
