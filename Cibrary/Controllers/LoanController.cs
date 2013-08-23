@@ -15,7 +15,8 @@ namespace Cibrary.Controllers
 
         public ActionResult Index()
         {
-            return View(db.Loans.ToList());
+            var loansNotDelivered = db.Loans.Where(l => l.TimeDelievered == null);
+            return View(loansNotDelivered.ToList());
         }
 
         

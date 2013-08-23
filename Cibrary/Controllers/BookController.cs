@@ -17,7 +17,6 @@ namespace Cibrary.Controllers
         private DataContext db = new DataContext();
 
         // GET: /Book/Details/5
-        [Authorize]
         public ActionResult Details(Int32 id)
         {
             Book book = db.Books.Find(id);
@@ -30,6 +29,7 @@ namespace Cibrary.Controllers
 
         //
         // GET: /Book/Create
+        [Authorize]
         public ActionResult Create()
         {
             ViewBag.Categories = db.Categorys.ToList();
@@ -40,6 +40,7 @@ namespace Cibrary.Controllers
         // POST: /Book/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Create(Book book, int[] selectedCategories)
         {
             if (book.Categories == null)
@@ -47,13 +48,15 @@ namespace Cibrary.Controllers
                 book.Categories = new Collection<Category>();
             }
 
-            foreach (var selectedCategory in selectedCategories)
+            if (selectedCategories != null)
             {
-                var category = db.Categorys.Find(selectedCategory);
+                foreach (var selectedCategory in selectedCategories)
+                {
+                    var category = db.Categorys.Find(selectedCategory);
 
-                book.Categories.Add(category);
+                    book.Categories.Add(category);
+                }
             }
-
 
 
             if (ModelState.IsValid)
@@ -84,6 +87,7 @@ namespace Cibrary.Controllers
         // POST: /Book/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Edit(Book book, int[] selectedCategories)
         {
             var dbBook = db.Books.Find(book.BookId);
@@ -149,6 +153,7 @@ namespace Cibrary.Controllers
         // POST: /Book/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult DeleteConfirmed(Int32 id)
         {
             Book book = db.Books.Find(id);
@@ -201,6 +206,18 @@ namespace Cibrary.Controllers
 
             return RedirectToAction("Index");
 
+        }
+
+        public ActionResult DeliverBook(Int32 id)
+        {
+            String userId = User.Identity.GetUserId();
+            Loan loanToDeliver = db.Loans.Find(id, userId);
+            loanToDeliver.TimeDelievered = DateTime.Now;
+            if (ModelState.IsValid)
+            {
+                db.SaveChanges();
+            }
+            return RedirectToAction("Index");
         }
         //new code 21/08
         //Seach Function
