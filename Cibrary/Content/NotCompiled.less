@@ -124,6 +124,8 @@ font-weight: bold;
 }
 
 .accordion-button {
+    margin-top: -10px;
+    float: right;
     color: @gray-color;
 }
 
@@ -131,7 +133,9 @@ font-weight: bold;
     color: @gray-color;
 }
 
-a.accordion-button {
+a.accordion-button-loan {
+        text-align: center;
+        width: 70px;
         color: white;
         background-color: @purple-color;
         padding: 5px;
@@ -140,7 +144,23 @@ a.accordion-button {
         margin-right: 10px;
     }
 
-a.accordion-button:hover {
+a.accordion-button-loan:hover {
+    background-color: @darkpurple-color;
+    color: white;
+}
+
+a.accordion-button-return {
+        text-align: center;
+        width: 70px;
+        color: white;
+        background-color: @gray-color;
+        padding: 5px;
+        border: 1px solid @darkgreen-color;
+        margin-top: -44px;
+        margin-right: 10px;
+    }
+
+a.accordion-button-return:hover {
     background-color: @darkpurple-color;
     color: white;
 }

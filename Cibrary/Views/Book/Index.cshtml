@@ -37,7 +37,7 @@
                             }
                         else
                         {
-                                  <span style="float: right">@Html.ActionLink("Lån bok", "LoanBook", new { id = item.BookId })</span>
+                                  @Html.ActionLink("Lån", "LoanBook", new { id = item.BookId }, new {@class="accordion-button-loan pull-right"})
                         }
                         
                     }
@@ -48,12 +48,12 @@
                         if (firstOrDefault != null && HttpContext.Current.User.Identity.Name == firstOrDefault.UserProfile.UserName)
                         {
                             
-                            <span style="float: right">@Html.ActionLink("Returner bok", "DeliverBook", new { id = item.BookId })</span>
+                            <span style="float: right">@Html.ActionLink("Returnér", "DeliverBook", new { id = item.BookId }, new {@class="accordion-button-return pull-right"})</span>
 
                         }
                         else
                         {
-                            <span style="float: right">Utlånt</span>
+                            <span class="accordion-button">Utlånt</span>
                         }
 
 
