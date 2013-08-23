@@ -76,7 +76,17 @@
 </div>
 <span class="pull-right">
     @{
-        int available = Model.Count();
+        int available = 0;
+       
+        foreach (var book in Model)
+        {
+            var firstOrDefault = book.Loans.FirstOrDefault(x => x.TimeDelievered == null);
+            if (firstOrDefault == null)
+            {
+                available++;
+            }
+        }
+        
     }
     @Html.DisplayFor(a => available) tilgjengelige bøker (
     @{
