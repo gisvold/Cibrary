@@ -26,11 +26,10 @@
             <div class="accordion-heading">
                 <a class="accordion-toggle" data-toggle="collapse" data-parent="booklist" href="#@Html.DisplayFor(m => item.BookId)">
                     @Html.DisplayFor(modelItem => item.Title)
-                    @if(item.Edition != null){
-                        <span>(utgave @Html.DisplayFor(model => item.Edition))</span>
+                    @if(item.Edition != null){                       
                     }
                     <br>
-                    <span style="font-style:italic; font-weight: normal; margin-left: 5px;">Av: @Html.DisplayFor(modelItem => item.Author), utgitt @Html.DisplayFor(modelItem => item.ReleaseYear)</span>
+                    <span style="font-style:italic; font-weight: normal; margin-left: 5px;">Av: @Html.DisplayFor(modelItem => item.Author)</span>
                     @if (item.Loans.FirstOrDefault(l => l.TimeDelievered == null) == null)
                     {
                         if (item.Loans.FirstOrDefault(l => l.UserId == User.Identity.GetUserId() && l.BookId == item.BookId) != null)
@@ -64,15 +63,27 @@
         </div>
         <div id="@Html.DisplayFor(m => item.BookId)" class="accordion-body collapse">
             <div class="accordion-inner">
-
+                <table>
+                    <tr>
+                        <td style="font-weight: bold;">Utgitt år:</td><td>@Html.DisplayFor(modelItem => item.ReleaseYear)</td>
+                        
+                    </tr>
+                    @if (item.Edition != null)
+                    {
+                        <tr>
+                        <td style="font-weight: bold;">Utgave:</td><td>@Html.DisplayFor(model => item.Edition)</td>
+                    </tr>
+                    }
+                    
+                </table>
                 <p>@Html.DisplayFor(modelItem => item.Description)</p>
                 <div>
                     @foreach (var kat in item.Categories)
-                        {
+                    {
                         <span class="tag">
                             @Html.ActionLink(kat.Name, "Index", new { searchString = kat.Name })
                         </span>
-                        }
+                    }
                 </div>
                 <br>
 
