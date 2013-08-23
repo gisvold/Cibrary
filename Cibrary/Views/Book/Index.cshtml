@@ -30,7 +30,7 @@
                     <span style="font-style:italic; font-weight: normal; margin-left: 5px;">Av: @Html.DisplayFor(modelItem => item.Author), utgitt @Html.DisplayFor(modelItem => item.ReleaseYear)</span>
                     @if (item.Loans.FirstOrDefault(l => l.TimeDelievered == null) == null)
                     {
-                        <span style="float: right">@Html.ActionLink("Lån bok", "LoanBook", new { id = item.BookId })</span>
+                        <span class="accordion-button" style="float: right">@Html.ActionLink("Lån bok", "LoanBook", new { id = item.BookId }, new { @class="accordion-button pull-right"})</span>
                     }
                     else
                     {
@@ -38,12 +38,12 @@
                         var firstOrDefault = item.Loans.FirstOrDefault(l => l.TimeDelievered == null);
                         if (firstOrDefault != null && HttpContext.Current.User.Identity.Name == firstOrDefault.UserProfile.UserName)
                         {
-                            <span style="float: right">Returner bok</span>
+                            <span class="accordion-button" style="float: right">Returner bok</span>
 
                         }
                         else
                         {
-                            <span style="float: right">Utlånt</span>
+                            <span class="accordion-button" style="float: right">Utlånt</span>
                         }
 
 
