@@ -10,7 +10,6 @@ namespace Cibrary.Models
         [Required]
         [Display(Name = "Kategorinavn")]
         public string Name { get; set; }
-
         public virtual ICollection<Book> Books{ get; set; }
 
     }

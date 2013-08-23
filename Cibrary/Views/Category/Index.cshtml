@@ -6,9 +6,6 @@
 
 <h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
@@ -23,11 +20,27 @@
             @Html.DisplayFor(modelItem => item.Name)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.CategoryId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.CategoryId }) |
+            @Html.ActionLink("Edit", "Edit", new { id=item.CategoryId })
+            @Html.ActionLink("Details", "Details", new { id=item.CategoryId }) 
             @Html.ActionLink("Delete", "Delete", new { id=item.CategoryId })
         </td>
     </tr>
 }
 
 </table>
+
+
+@using (Html.BeginForm("Index", "Category", FormMethod.Post))
+    {
+           
+            @Html.TextBox("name") 
+            <i class="icon-plus"></i>
+            <input type="submit" class="submitcategori" value="legg til ny kategori" />
+           
+    }
+<p> <!-- Html.ActionLink("Legg til kategori", "Create")--></p> 
+
+
+
+
+
