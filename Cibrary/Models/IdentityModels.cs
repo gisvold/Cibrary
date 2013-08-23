@@ -24,6 +24,7 @@ namespace Cibrary.Models
         [Key]
         public string Id { get; set; }
 
+        [Display(Name = "Bruker")]
         public string UserName { get; set; }
 
         public virtual ICollection<Loan> Loans { get; set; }

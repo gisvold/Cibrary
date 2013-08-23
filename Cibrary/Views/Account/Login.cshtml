@@ -38,22 +38,19 @@
                             </label>
                         </div>
                     </div>
-                    <div class="form-actions no-color">
-                        <input type="submit" value="Logg inn" class="btn" />
+                    <div class="form-actions no-color span6" >
+                        <input type="submit" value="Logg inn" class="btn" />                     
                     </div>
                 </fieldset>
                 <p>
                     Dersom du ikke har en CIBRARY-konto kan du registrere en ny @Html.ActionLink("her", "Register")
+                    
                 </p>
             }
+     
         </section>
     </div>
-    <div class="span12">
-        <section id="socialLoginForm">
 
-            @Html.Action("ExternalLoginsList", new { ReturnUrl = ViewBag.ReturnUrl })
-        </section>
-    </div>
 </div>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

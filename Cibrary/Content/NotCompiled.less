@@ -2,7 +2,10 @@
 @darkpurple-color: #320255;
 @lightpurple-color: #7635A5;
 @green-color: #c0d72f;
+@darkgreen-color: #869621;
+@lightgreen-color: #E6EFAC;
 @gray-color: #6e6e6e;
+@lightgray-color: #eeeeee;
 
 body {
     padding-top: 60px;
@@ -95,5 +98,118 @@ font-weight: bold;
         &:focus{
             box-shadow:none !important;
         }
+    }
+}
+
+.accordion-group {
+    border-color: @lightgreen-color;
+}
+
+.accordion-heading {
+    background-color: @green-color;
+    
+    :hover {
+        background-color: @darkgreen-color;
+        color: black;
+}
+
+    a {
+        font-weight: bold;
+        color: black;
+    }
+
+    p {
+        font-style: italic;
+    }
+}
+
+.accordion-button {
+    margin-top: -10px;
+    float: right;
+    color: @gray-color;
+}
+
+.accordion-button:hover {
+    color: @gray-color;
+}
+
+a.accordion-button-loan {
+        text-align: center;
+        width: 70px;
+        color: white;
+        background-color: @purple-color;
+        padding: 5px;
+        border: 1px solid @darkgreen-color;
+        margin-top: -44px;
+        margin-right: 10px;
+    }
+
+a.accordion-button-loan:hover {
+    background-color: @darkpurple-color;
+    color: white;
+}
+
+a.accordion-button-return {
+        text-align: center;
+        width: 70px;
+        color: white;
+        background-color: @gray-color;
+        padding: 5px;
+        border: 1px solid @darkgreen-color;
+        margin-top: -44px;
+        margin-right: 10px;
+    }
+
+a.accordion-button-return:hover {
+    background-color: @darkpurple-color;
+    color: white;
+}
+
+.tag a {
+        color: black;
+        background-color: @lightgreen-color;
+        padding: 5px;
+        margin-right: 5px;
+}
+
+.tag a:hover {
+    background-color: @green-color;
+}
+
+
+.categoryCheckbox{
+
+    padding: 2px;
+
+    label{
+        display:inline-block;
+        background: @lightgray-color;
+        padding:5px;
+
+        &:hover{
+            background: @green-color;
+        }
+    }
+
+    input[type="checkbox"]{
+        display: none;
+    }
+
+    input[type="checkbox"]:checked + label{
+        background-color: @lightgreen-color;
+
+    }
+
+}
+
+a {
+    color: @purple-color;
+
+    &:hover {
+        color: @lightpurple-color;
+    }
+    &:visited, &:link, &:active
+    {
+        text-decoration: none;
     }
 }

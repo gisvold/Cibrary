@@ -8,6 +8,7 @@ using System.Security.Permissions;
 using System.Web;
 using System.Web.Mvc;
 using Cibrary.Models;
+using Microsoft.AspNet.Identity;
 
 namespace Cibrary.Controllers
 {
@@ -16,7 +17,6 @@ namespace Cibrary.Controllers
         private DataContext db = new DataContext();
 
         // GET: /Book/Details/5
-        [Authorize]
         public ActionResult Details(Int32 id)
         {
             Book book = db.Books.Find(id);
@@ -29,9 +29,10 @@ namespace Cibrary.Controllers
 
         //
         // GET: /Book/Create
+        [Authorize]
         public ActionResult Create()
         {
-            ViewBag.Categories = db.Category.ToList();
+            ViewBag.Categories = db.Categorys.ToList();
             return View();
         }
 
@@ -39,6 +40,7 @@ namespace Cibrary.Controllers
         // POST: /Book/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Create(Book book, int[] selectedCategories)
         {
             if (book.Categories == null)
@@ -46,13 +48,15 @@ namespace Cibrary.Controllers
                 book.Categories = new Collection<Category>();
             }
 
+            if (selectedCategories != null)
+            {
             foreach (var selectedCategory in selectedCategories)
             {
-                var category = db.Category.Find(selectedCategory);
+                    var category = db.Categorys.Find(selectedCategory);
 
                 book.Categories.Add(category);
             }
-
+            }
 
 
             if (ModelState.IsValid)
@@ -71,7 +75,7 @@ namespace Cibrary.Controllers
         public ActionResult Edit(Int32 id)
         {
             Book book = db.Books.Find(id);
-            ViewBag.Categories = db.Category.ToList();
+            ViewBag.Categories = db.Categorys.ToList();
             if (book == null)
             {
                 return HttpNotFound();
@@ -83,6 +87,7 @@ namespace Cibrary.Controllers
         // POST: /Book/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Edit(Book book, int[] selectedCategories)
         {
             var dbBook = db.Books.Find(book.BookId);
@@ -113,7 +118,7 @@ namespace Cibrary.Controllers
             var selectedCategoriesHS = new HashSet<int>(selectedCategories);
             var bookCategories = new HashSet<int>
                 (bookToUpdate.Categories.Select(c => c.CategoryId));
-            foreach (var category in db.Category)
+            foreach (var category in db.Categorys)
             {
                 if (selectedCategoriesHS.Contains(category.CategoryId))
                 {
@@ -148,6 +153,7 @@ namespace Cibrary.Controllers
         // POST: /Book/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult DeleteConfirmed(Int32 id)
         {
             Book book = db.Books.Find(id);
@@ -162,19 +168,70 @@ namespace Cibrary.Controllers
             base.Dispose(disposing);
         }
 
+        [Authorize]
+        public ActionResult LoanBook(Int32 id)
+        {
+            Book book = db.Books.Find(id);
+            String userId = User.Identity.GetUserId();
+            User user = db.Users.Find(userId);
+            if (db.Loans.Find(book.BookId, userId) != null)
+            {
+                return RedirectToAction("Index");
+            }
+            Loan newLoan = new Loan
+            {
+                UserProfile = user, 
+                Book = book,
+                BookId = book.BookId,
+                TimeDelievered = null,
+                TimeLoaned = DateTime.Now
+             };
+            if (book.Loans == null)
+            {
+                book.Loans = new Collection<Loan>();
+            }         
+            book.Loans.Add(newLoan);
+
+            if (user.Loans == null)
+            {
+                user.Loans = new Collection<Loan>();
+            }
+            user.Loans.Add(newLoan);
+           
+            if (ModelState.IsValid)
+            {
+                db.SaveChanges();
+            }
+
+
+            return RedirectToAction("Index");
+
+        }
+
+        public ActionResult DeliverBook(Int32 id)
+        {
+            String userId = User.Identity.GetUserId();
+            Loan loanToDeliver = db.Loans.Find(id, userId);
+            loanToDeliver.TimeDelievered = DateTime.Now;
+            if (ModelState.IsValid)
+            {
+                db.SaveChanges();
+            }
+            return RedirectToAction("Index");
+        }
+        //new code 21/08
         //Seach Function
         public ActionResult Index(string searchString)
         {
-            IQueryable<Book> books = from m in db.Books
-                       select m;
+            IQueryable<Book> books = from m in db.Books select m;
 
             if (!String.IsNullOrEmpty(searchString))
             {
 
-                int intString;
-                int.TryParse(searchString, out intString);
+            int intString;
+            int.TryParse(searchString, out intString);
 
-                books = books.Where(s => (s.Title.Contains(searchString) || (s.Author.Contains(searchString)) || (s.Description.Contains(searchString)) || (s.Edition.Contains(searchString)) || (s.Categories.Any(c => c.Name.Equals(searchString)))||(s.ReleaseYear==intString)));
+            books = books.Where(s => (s.Title.Contains(searchString) || (s.Author.Contains(searchString)) || (s.Description.Contains(searchString)) || (s.Edition.Contains(searchString)) || (s.Categories.Any(c => c.Name.Equals(searchString)))||(s.ReleaseYear==intString)));
                 
             }
 
