@@ -32,7 +32,7 @@ namespace Cibrary.Controllers
         [Authorize]
         public ActionResult Create()
         {
-            ViewBag.Categories = db.Categorys.ToList();
+            ViewBag.Categories = db.Category.ToList();
             return View();
         }
 
@@ -50,12 +50,12 @@ namespace Cibrary.Controllers
 
             if (selectedCategories != null)
             {
-                foreach (var selectedCategory in selectedCategories)
-                {
-                    var category = db.Categorys.Find(selectedCategory);
+            foreach (var selectedCategory in selectedCategories)
+            {
+                    var category = db.Category.Find(selectedCategory);
 
-                    book.Categories.Add(category);
-                }
+                book.Categories.Add(category);
+            }
             }
 
 
@@ -75,7 +75,7 @@ namespace Cibrary.Controllers
         public ActionResult Edit(Int32 id)
         {
             Book book = db.Books.Find(id);
-            ViewBag.Categories = db.Categorys.ToList();
+            ViewBag.Categories = db.Category.ToList();
             if (book == null)
             {
                 return HttpNotFound();
@@ -94,7 +94,7 @@ namespace Cibrary.Controllers
             var oldCategories = dbBook.Categories;
             book.Categories = new Collection<Category>();
             if (oldCategories != null)
-            {
+        {
                 book.Categories = oldCategories;
             }
             
@@ -118,7 +118,7 @@ namespace Cibrary.Controllers
             var selectedCategoriesHS = new HashSet<int>(selectedCategories);
             var bookCategories = new HashSet<int>
                 (bookToUpdate.Categories.Select(c => c.CategoryId));
-            foreach (var category in db.Categorys)
+            foreach (var category in db.Category)
             {
                 if (selectedCategoriesHS.Contains(category.CategoryId))
                 {
@@ -231,7 +231,7 @@ namespace Cibrary.Controllers
             int intString;
             int.TryParse(searchString, out intString);
 
-                books = books.Where(s => (s.Title.Contains(searchString) || (s.Author.Contains(searchString)) || (s.Description.Contains(searchString)) || (s.Edition.Contains(searchString)) || (s.Categories.Any(c => c.Name.Equals(searchString)))||(s.ReleaseYear==intString)));
+            books = books.Where(s => (s.Title.Contains(searchString) || (s.Author.Contains(searchString)) || (s.Description.Contains(searchString)) || (s.Edition.Contains(searchString)) || (s.Categories.Any(c => c.Name.Equals(searchString)))||(s.ReleaseYear==intString)));
                 
             }
 
