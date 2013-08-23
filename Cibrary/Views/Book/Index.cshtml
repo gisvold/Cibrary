@@ -1,6 +1,5 @@
 @using Cibrary.Models
 @using Microsoft.Ajax.Utilities
-@using Microsoft.AspNet.Identity
 @model IEnumerable<Cibrary.Models.Book>
 
 @{
@@ -27,19 +26,15 @@
         <div class="accordion-group">
             <div class="accordion-heading">
                 <a class="accordion-toggle" data-toggle="collapse" data-parent="booklist" href="#@Html.DisplayFor(m => item.BookId)">
-                    @Html.DisplayFor(modelItem => item.Title) (utgave @Html.DisplayFor(modelItem => item.Edition))<br>
+                    @Html.DisplayFor(modelItem => item.Title) 
+                    @if(item.Edition != null){
+                        <span>(utgave @Html.DisplayFor(model => item.Edition))</span>
+                    }
+                        <br>
                     <span style="font-style:italic; font-weight: normal; margin-left: 5px;">Av: @Html.DisplayFor(modelItem => item.Author), utgitt @Html.DisplayFor(modelItem => item.ReleaseYear)</span>
                     @if (item.Loans.FirstOrDefault(l => l.TimeDelievered == null) == null)
                     {
-                        if (item.Loans.FirstOrDefault(l => l.UserId == User.Identity.GetUserId() && l.BookId == item.BookId) != null)
-                            {
-                                 <span style="float: right">Beklager, du kan ikke låne en bok mer enn en gang :)</span>
-                            }
-                        else
-                        {
-                                  <span style="float: right">@Html.ActionLink("Lån bok", "LoanBook", new { id = item.BookId })</span>
-                        }
-                        
+                        <span style="float: right">@Html.ActionLink("Lån bok", "LoanBook", new { id = item.BookId })</span>
                     }
                     else
                     {
@@ -47,8 +42,7 @@
                         var firstOrDefault = item.Loans.FirstOrDefault(l => l.TimeDelievered == null);
                         if (firstOrDefault != null && HttpContext.Current.User.Identity.Name == firstOrDefault.UserProfile.UserName)
                         {
-                            
-                            <span style="float: right">@Html.ActionLink("Returner bok", "DeliverBook", new { id = item.BookId })</span>
+                            <span style="float: right">Returner bok</span>
 
                         }
                         else
