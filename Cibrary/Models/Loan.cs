@@ -27,7 +27,7 @@ namespace Cibrary.Models
                 span.Duration().Days > 0
                     ? string.Format("{0:0} dag{1}, ", span.Days, span.Days == 1 ? String.Empty : "er")
                     : string.Empty,
-                span.Duration().Hours > 0
+                span.Duration().Hours >= 0
                     ? string.Format("{0:0} time{1}, ", span.Hours, span.Hours == 1 ? String.Empty : "r")
                     : string.Empty);
 
