@@ -6,6 +6,8 @@
     <title>CIBRARY - @ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <link rel="shortcut icon"
+          href="/faviconCiber.ico" />
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -22,6 +24,7 @@
                         <li>@Html.ActionLink("Søk", "Index", "Book")</li>
                         <li>@Html.ActionLink("Ny Bok ", "Create", "Book")</li>
                         <li>@Html.ActionLink("Lånte bøker", "Index", "Loan")</li>
+                        <li>@Html.ActionLink("legge til categori", "Index", "Category")</li>
                     </ul>
                     @Html.Partial("_LoginPartial")
                 </div>
